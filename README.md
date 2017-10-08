@@ -1,6 +1,8 @@
 # muse
 
-FIXME
+This is the source for butternotes.com.
+
+You will need to fix the sql file found under /src/muse/db/conn.clj
 
 ## Prerequisites
 
