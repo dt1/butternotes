@@ -90,15 +90,16 @@
       [:li [:a {:href "/blog"} "Blog"]]
       [:li [:a {:href "/about"} "About"]]
       [:li "|"]
-      [:li [:a..fi-mail
-            {:href "/newsletter"
-             :style "font-size:36px;"}]]
-      [:li [:a..fi-social-twitter
-            {:href "https://twitter.com/ButternotesWeb"
-             :style "font-size:36px;"}]]
-      [:li [:a..fi-social-facebook
-            {:href "https://www.facebook.com/butternotescom-1735463286766016/"
-             :style "font-size:36px;"}]]
-      [:li [:a.fi-social-pinterest
-            {:href "https://www.pinterest.com/butternotes/"
-             :style "font-size:36px;"}]]]]]])
+      ;; [:li [:a..fi-mail
+      ;;       {:href "/newsletter"
+      ;;        :style "font-size:36px;"}]]
+      ;; [:li [:a..fi-social-twitter
+      ;;       {:href "https://twitter.com/ButternotesWeb"
+      ;;        :style "font-size:36px;"}]]
+      ;; [:li [:a..fi-social-facebook
+      ;;       {:href "https://www.facebook.com/butternotescom-1735463286766016/"
+      ;;        :style "font-size:36px;"}]]
+      ;; [:li [:a.fi-social-pinterest
+      ;;       {:href "https://www.pinterest.com/butternotes/"
+      ;;        :style "font-size:36px;"}]]
+      ]]]])

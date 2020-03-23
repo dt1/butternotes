@@ -129,7 +129,7 @@
 (defn chord-page [chord-type chord-name m &w]
   (pg/html-wrapper
 
-   [:head mhd/item-scope
+   [:head 
     [:title (str "Butter Notes | " chord-name)]
     [:meta {:description "Butter Notes Blog Page"}]
     (for [hh ["global" "abcweb" "sounds"]

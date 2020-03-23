@@ -129,7 +129,7 @@
 (defn chord-page [chord-type chord-name m &w]
   (pg/html-wrapper
 
-   [:head mhd/item-scope
+   [:head 
     [:title (str "Butter Notes | " chord-name)]
     [:meta {:description "Butter Notes Blog Page"}]
     (for [hh ["global" "abcweb"]
@@ -140,7 +140,7 @@
    [:div.row    
     (pg/create-sublinks chord-type)
     [:button {:onclick "download()"
-                :class "button"} "Download MusicXML"]
+              :class "button"} "Download MusicXML"]
      [:div#notation.medium-12.columns]     
      (chord-form chord-name chord-type m)
      [:div#test-div {:style "display:none"}

@@ -11,7 +11,7 @@
                    (sql/blog-content sql/db {:blog_id blog-id}))]
     (pg/html-wrapper
 
-     [:head mhd/item-scope
+     [:head 
       [:title (str "Butter Notes | " (:blog_title blog-info))]
       [:meta {:description (:blog_title blog-info)}]
       (for [x (mhd/headers {:head-type "global"})]

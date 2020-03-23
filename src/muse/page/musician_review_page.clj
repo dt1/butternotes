@@ -22,7 +22,7 @@
 
     (pg/html-wrapper
 
-     [:head mhd/item-scope
+     [:head 
       [:title (str "Butter Notes | "
                    (:musician_name musician-info)
                    " Mini-Review")]

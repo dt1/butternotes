@@ -10,7 +10,7 @@
   (let [blog-titles (sql/get-blog-titles sql/db)]
     (pg/html-wrapper
 
-     [:head mhd/item-scope
+     [:head 
       [:title "Butter Notes | Blog Listing"]
       [:meta {:description "Butter Notes Blog Page"}]
       (for [x (mhd/headers {:head-type "global"})]

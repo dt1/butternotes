@@ -9,7 +9,7 @@
 (defn my-music-page []
   (pg/html-wrapper
    
-   [:head mhd/item-scope
+   [:head 
     [:title "Butter Notes | My Music"]
     [:meta {:description "My Music"}]
     (for [x (mhd/headers {:head-type "global"})]

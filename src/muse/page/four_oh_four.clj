@@ -8,7 +8,7 @@
 (defn four-oh-four []
   (pg/html-wrapper
    
-   [:head mhd/item-scope
+   [:head 
     [:title "Butter Notes | Page Not Found"]
     [:meta {:description "Page Not Found"}]
     (for [x (mhd/headers {:head-type "global"})]

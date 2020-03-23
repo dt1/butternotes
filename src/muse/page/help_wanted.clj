@@ -8,7 +8,7 @@
 (defn help-wanted []
   (pg/html-wrapper
 
-   [:head mhd/item-scope
+   [:head 
     [:title "Butter Notes | Help Wanted"]
     [:meta {:description "Butter Notes Help Wanted Page"}]
     (for [x (mhd/headers {:head-type "global"})]

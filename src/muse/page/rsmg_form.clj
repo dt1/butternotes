@@ -83,7 +83,7 @@
 (defn rsmg []
   (pg/html-wrapper
 
-   [:head mhd/item-scope
+   [:head 
     [:title (str "Butter Notes | Random Sheet Music Generator")]
     [:meta {:description "A Random Sheet Music Generator"}]
     (for [hh ["global"]

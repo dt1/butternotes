@@ -52,7 +52,7 @@
   (prn arr)
   (pg/html-wrapper
 
-   [:head mhd/item-scope
+   [:head 
     [:title "Butter Notes | Lab, generate sheet music"]
     [:meta {:description "Butter Notes Sheet Music Generator"}]
     (for [x (mhd/headers {:head-type "global"})]

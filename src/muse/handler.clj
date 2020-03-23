@@ -4,17 +4,19 @@
             [compojure.handler :refer [site]]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [ring.util.response :as resp]
+            [ring.middleware.cors :as cors]
 
             [muse.page.page :as pg]
             [muse.genxml.genxml :as gxml]
             [muse.genxml.notevector :as nvr]
             [muse.genxml.soundvector :as svr]
             [clojure.data.xml :refer :all]
-            [ring.adapter.jetty :as jetty]
             [environ.core :refer [env]]
             [buddy.hashers :as hash]
+            [clojure.data.json :as json]
 
             [muse.page.homepage :as hmp]
+            [muse.layout.sidenav :as sidenav]
             [muse.page.about :as abt]
             [muse.page.newsletter :as nsr]
             [muse.page.four_oh_four :as fof]
@@ -162,39 +164,22 @@
         (chord-page x2-conv x3 m)
         (minor-scale-page x2-conv x3 m)))))
 
-(defn beta-signup [m]
-  (let [minfo (sql/get-beta-email sql/db {:email (m "email")})]
-          
-          (cond (not= (m "pwd")
-                      (m "pwd2"))
-                (pbs/beta_su_page "passwords do not match")
-
-                (not (empty? minfo))
-                (pbs/beta_su_page "email already exists")
-
-                (empty? minfo)
-                (do (sql/insert-beta-user sql/db {:email (m "email")
-                                                  :pwd (hash/encrypt
-                                                        (m "pwd"))})
-                    (pbs/beta_su_page "user valid"))
-                
-                :else
-                (pbs/beta_su_page minfo))))
-
-(defn login [m]
-  (let [hpwd (sql/select-user-password sql/db {:email (m "email")})]
-    (if (hash/check (m "pwd") ((first hpwd) :password))
-      "true"
-      "false")))
-
 (defroutes app-routes
-  (GET "/" [] (home-page))
+  (GET "/" []
+       (json/write-str (home-page))
+       (home-page))
+
+  (GET "/homepage" []
+       (json/write-str (home-page)))
+
+  (GET "/sidenav" []
+       (json/write-str (sidenav/side-nav)))
+
   (GET "/:x1" [x1]
        (valid-x1-route? x1))
 
   (GET "/:x1/:x2" [x1 x2]
        (valid-x2-route? x1 x2))
-
 
   (GET "/:x1/:x2/:x3" [x1 x2 x3 & m]
        (valid-x3-route? x1 x2 x3 m))
@@ -214,6 +199,7 @@
            sound-vec)))
 
   (GET "/newsletter" [] (nsr/sign-up))
+
   (GET "/about" [] (abt/about))
 
   (GET "/lab" [] (lab/lab-page))
@@ -237,25 +223,15 @@
 
   (GET "/help-wanted" [] (help/help-wanted))
 
-  (GET "/private-beta-signup" []
-       (pbs/beta_su_page))
-  (POST "/private-beta-signup" {m :form-params}
-        (beta-signup m))
-
-  (GET "/login" []
-       (plg/login-page))
-  
-  (POST "/login" {m :form-params}
-        (login m))
-
   (GET "/xml/sitemap" []
        (resp/redirect "https://s3-us-west-1.amazonaws.com/butternotes/xml/sitemap.xml"))
 
   (route/not-found (fof/four-oh-four)))
 
 (def app
-  (wrap-defaults app-routes site-defaults))
+  (-> (wrap-defaults app-routes site-defaults)
+      (cors/wrap-cors :access-control-allow-origin [#".*"]
+                      :access-control-allow-methods [:get :put :post :delete])))
 
-(defn -main [& [port]]
-  (let [port (Integer. (or port (env :port) 5000))]
-    (jetty/run-jetty (site #'app) {:port port :join? false})))
+;; (def app
+;;   (wrap-defaults app-routes site-defaults))

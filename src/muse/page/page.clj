@@ -5,7 +5,7 @@
 
             [muse.page.head :as mhd]
             [muse.page.topnav :as tnav]
-            [muse.page.sidenav :as snav]
+            [muse.layout.sidenav :as snav]
             [muse.page.scale_form :as scm]
             [muse.page.pattern_info :as ppi]
 
@@ -21,6 +21,9 @@
    $(document).ready(function() {
      $(document).foundation();
    })"])
+
+(def xml-loader
+  [:script {:src "/js/osmd/xml-loader.js"}])
 
 (defn capitalize-scales
   "Capitalize every word in a string"
@@ -172,27 +175,27 @@
 (defn top-row []
   [:div.row
    [:div.medium-2.columns
-     [:h1 {:style "font-size: 1em;"}
-      [:a.black {:href "/"} "Butter Notes"]
-      [:br]
-      [:small.black "Explore & Practice Music."]]]
-   [:div.medium-5.columns
-    [:ul.menu
-     [:li [:a.fi-mail.black
-           {:href "/newsletter"
-            :style "font-size:24px;"}]]
-     [:li [:a.fi-social-twitter.black
-           {:href "https://twitter.com/ButternotesWeb"
-            :style "font-size:30px;"}]]
-     [:li [:a.fi-social-facebook.black
-           {:href "https://www.facebook.com/butternotesweb"
-            :style "font-size:30px;"}]]
-     ;; [:li [:a.fi-social-pinterest.black
-     ;;       {:href "https://www.pinterest.com/butternotes/"
-     ;;        :style "font-size:30px;"}]]
-     [:li [:a.fi-social-youtube.black
-           {:href "https://www.youtube.com/channel/UCeOcCGyn5LFXcaZbNCEvg1w"
-            :style "font-size:30px;"}]]]]
+    [:h1 {:style "font-size: 1em;"}
+     [:a.black {:href "/"} "unknown"]
+     [:br]
+     [:small.black "Explore & Practice Music."]]]
+   ;; [:div.medium-5.columns
+   ;;  [:ul.menu
+   ;;   [:li [:a.fi-mail.black
+   ;;         {:href "/newsletter"
+   ;;          :style "font-size:24px;"}]]
+   ;;   [:li [:a.fi-social-twitter.black
+   ;;         {:href "https://twitter.com/ButternotesWeb"
+   ;;          :style "font-size:30px;"}]]
+   ;;   [:li [:a.fi-social-facebook.black
+   ;;         {:href "https://www.facebook.com/butternotesweb"
+   ;;          :style "font-size:30px;"}]]
+   ;;   ;; [:li [:a.fi-social-pinterest.black
+   ;;   ;;       {:href "https://www.pinterest.com/butternotes/"
+   ;;   ;;        :style "font-size:30px;"}]]
+   ;;   [:li [:a.fi-social-youtube.black
+   ;;         {:href "https://www.youtube.com/channel/UCeOcCGyn5LFXcaZbNCEvg1w"
+   ;;          :style "font-size:30px;"}]]]]
    (build-image-ad)])
 
 (defn mode-links [note dnotes]
@@ -245,7 +248,7 @@
         {:href "#collapse1"
          :role "tab"
          :id "collapse1-heading"
-         ;:style "border-color: black"
+                                        ;:style "border-color: black"
          } "Show Notes"]
        [:div.accordion-content
         {:role "tabpanel"
@@ -258,21 +261,21 @@
             [:p tt ": " xx]))]]]]))
 
 (defn download-musicxml []
-    [:div.medium-12.columns
-     [:ul.accordion {:data-accordion "data-accordion"
-                     :data-allow-all-closed "true"}
-      [:li.accordion-item
-       [:a.accordion-title
-        {:href "#collapse1"
-         :role "tab"
-         :id "collapse1-heading"
-         ;:style "border-color: black"
-         } "Download MusicXML"]
-       [:div.accordion-content
-        {:role "tabpanel"
-         :data-tab-content "data-tab-content"
-         :aria-labelledby "panel1d-heading"}
-        [:button {:onclick "download()"
+  [:div.medium-12.columns
+   [:ul.accordion {:data-accordion "data-accordion"
+                   :data-allow-all-closed "true"}
+    [:li.accordion-item
+     [:a.accordion-title
+      {:href "#collapse1"
+       :role "tab"
+       :id "collapse1-heading"
+                                        ;:style "border-color: black"
+       } "Download MusicXML"]
+     [:div.accordion-content
+      {:role "tabpanel"
+       :data-tab-content "data-tab-content"
+       :aria-labelledby "panel1d-heading"}
+      [:button {:onclick "download()"
                 :class "button"} "Download MusicXML"]]]]])
 
 (defn html-wrapper [heading content]
@@ -297,42 +300,44 @@
      (if (= scale-type "chromatic-scales")
        (chromatic-links)
        (create-sublinks scale-type))]
-     [:div.row
-      [:div.medium-10.columns
-       [:div.row
-        [:div.medium-4.columns
-         [:a#playstop {:href "#"
-                       :style "font-size:2em; color:black"}
-          "&#9656; (play)"]]
-        [:div.medium-3.columns
-         "BPM: "
-         [:input {:id "bpmbox"
-                  :type "number"
-                  :value "60"
-                  :onchange "changeBPM(this)"}]]]]
-        [:div.medium-5.columns ""]
+    [:div.row
+     [:div.medium-10.columns
+      [:div.row
+       [:div.medium-4.columns
+        [:a#playstop {:href "#"
+                      :style "font-size:2em; color:black"}
+         "&#9656; (play)"]]
+       [:div.medium-3.columns
+        "BPM: "
+        [:input {:id "bpmbox"
+                 :type "number"
+                 :value "60"
+                 :onchange "changeBPM(this)"}]]]]
+     [:div.medium-5.columns ""]
 
-      [:div.medium-12.columns
-       [:div#notation]]
-      (download-musicxml)
-      (show-notes scl scale-type)
-      (ppi/pattern scale-type)
-      (if (and (not= dnotes "theory")
-               (= scale-type "major-scales"))
-        (mode-links note dnotes))
-      (scm/scale-form m scale-type)]
-     [:div#test-div {:style "display:none"}
-      &w]
+     [:div.medium-12.columns
+      [:div#osmdCanvas]]
+     (download-musicxml)
+     (show-notes scl scale-type)
+     (ppi/pattern scale-type)
+     (if (and (not= dnotes "theory")
+              (= scale-type "major-scales"))
+       (mode-links note dnotes))
+     (scm/scale-form m scale-type)]
+    [:div#xml; {:style "display:none"}
+     &w]
     (pscale/play-scale scl)
-    [:script "function download(){
-    var a = document.body.appendChild(
-        document.createElement(\"a\")
-    );
-    a.download = \"random-sheet-music.xml.\";
-    a.href = \"data:text/xml,\" + document.getElementById(\"test-div\").innerHTML;
-    a.click();
-}
-"]]))
+    xml-loader
+    ;; [:script "function download(){
+;;     var a = document.body.appendChild(
+;;         document.createElement(\"a\")
+;;     );
+;;     a.download = \"random-sheet-music.xml.\";
+;;     a.href = \"data:text/xml,\" + document.getElementById(\"test-div\").innerHTML;
+;;     a.click();
+;; }
+;; "]
+    ]))
 
 (defn major-scale-nav-page [notes]
   (html5
@@ -349,7 +354,9 @@
          [:p [:a {:href (apply str "/major-scales/" x
                                "-major-scale")}
               (note-to-str x)]])]]]]
-   jquery-load))
+   jquery-load
+   xml-loader)
+  )
 
 (def diatonic-list ["ionian" "dorian" "phrygian" "lydian"
                     "mixolydian"

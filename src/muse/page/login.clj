@@ -9,7 +9,7 @@
 (defn login-page [& err]
   (pg/html-wrapper
 
-   [:head mhd/item-scope
+   [:head 
     [:title "Butter Notes | About"]
     [:meta {:description "Information About Butter Notes"}]
     [:meta {:name "robots" :content "noindex"}]

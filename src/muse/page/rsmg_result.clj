@@ -9,7 +9,7 @@
 (defn random-music-generator-result [&x &y]
   (pg/html-wrapper
 
-   [:head mhd/item-scope
+   [:head 
     [:title (str "Butter Notes | RSMG Result")]
     [:meta {:description "A Random Sheet Music Generator Result"}]
     (for [hh ["global" "abcweb" "sounds"]

@@ -18,7 +18,7 @@
 (defn explore-musician-page []
   (pg/html-wrapper
 
-   [:head mhd/item-scope
+   [:head 
     [:title "Butter Notes | Explore Musicians"]
     [:meta {:description "Butter Notes Blog Page"}]
     (for [x (mhd/headers {:head-type "global"})]

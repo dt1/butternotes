@@ -10,7 +10,7 @@
 (defn lab-page [& arr]
   (pg/html-wrapper
 
-   [:head mhd/item-scope
+   [:head 
     [:title "Butter Notes | Lab"]
     [:meta {:description "Butter Notes, Browse Labs"}]
     (for [x (mhd/headers {:head-type "global"})]

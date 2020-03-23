@@ -10,7 +10,7 @@
 (defn lab-page [& arr]
   (pg/html-wrapper
 
-   [:head mhd/item-scope
+   [:head 
     [:title "Butter Notes | Lab, recording"]
     [:meta {:description "Play Music and Generate Sheet Music (very beta)"}]
     (for [x (mhd/headers {:head-type "global"})]

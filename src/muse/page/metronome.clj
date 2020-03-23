@@ -8,7 +8,7 @@
 (defn metronome-page []
   (pg/html-wrapper
 
-   [:head mhd/item-scope
+   [:head 
     [:title "Butter Notes | Metronome"]
     [:meta {:description "Butter Notes Metronome with complex 
 time signatures."}]
