@@ -13,8 +13,8 @@
 
             [muse.valid_xn_map :as vxm]
             [muse.db.conn :as sql]
-            
-            [muse.page.utils.playscale :as pscale]))
+            [muse.page.utils.playscale :as pscale]
+            [muse.utils.utils :as utils]))
 
 (def jquery-load
   [:script "
@@ -25,15 +25,8 @@
 (def xml-loader
   [:script {:src "/js/osmd/xml-loader.js"}])
 
-(defn capitalize-scales
-  "Capitalize every word in a string"
-  [s]
-  (->> (c-str/split (str s) #"\b")
-       (map c-str/capitalize)
-       c-str/join))
-
 (defn note-to-str [s]
-  (capitalize-scales
+  (utils/capitalize-string
    (c-str/replace s #"-" " ")))
 
 (defn mode-to-str [m]
@@ -83,12 +76,6 @@
           :when (some #(= scl %) v)]
       k)))
 
-(defn capitalize-scales [s]
-  "Capitalize every word in a string"
-  (->>
-   (c-str/split (str s) #"\b")
-   (map c-str/capitalize)
-   c-str/join))
 
 (defn create-sublinks-helper [stype scl]
   [:ul.menu
@@ -112,7 +99,7 @@
   (let [scl (getscale stype)]
     [:div [:span
            (-> stype
-               (capitalize-scales)
+               (utils/capitalize-string)
                (c-str/replace "-" " ")
                (str ":"))]
      (create-sublinks-helper stype scl)]))
@@ -120,7 +107,7 @@
 ;; (defn create-diminished-sublinks [stype]
 ;;   (let [scl (getscale stype)]
 ;;     [:div [:span (str (c-str/replace
-;;                        (capitalize-scales stype)
+;;                        (utils/capitalize-string stype)
 ;;                        #"-" " ") ":")]
 ;;      [:ul.menu
 ;;       (for [n dim-links-vec]

@@ -1,0 +1,24 @@
+<template>
+<div id="app">
+  <div class="grid-container fluid">
+    <div class="grid-x grid-margin-x">
+      <div class="cell small-12">
+        <h1 style="font-size: 1em;">
+          <router-link to="/" class="black">unknown</router-link>
+          <br>
+          <small class="black">Explore &amp; Practice Music.</small>
+        </h1>
+      </div>
+    </div>
+  </div>
+  
+  <div class="grid-x">
+
+    <side-nav class="cell small-3"/>
+    <router-view name="maininfo" class="cell small-9"></router-view>
+  </div>
+</div>
+</template>
+
+<script>
+</script>

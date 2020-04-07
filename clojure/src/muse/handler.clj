@@ -69,13 +69,15 @@
 (defn chromatic-scale-page [scale-name m]
   (let [notes (nvr/get-notes scale-name)
         scale-vector (gxml/scale-vector notes "chromatic-scale")]
-    (pg/scale-page
-     scale-name
-     ""
-     (svr/scale-sound-vector scale-vector)
-     m
-     "chromatic-scales"
-     (emit-str (gxml/gen-sheet-music scale-vector scale-name m)))))
+    (emit-str (gxml/gen-sheet-music scale-vector scale-name m))
+    ;; (pg/scale-page
+    ;;  scale-name
+    ;;  ""
+    ;;  (svr/scale-sound-vector scale-vector)
+    ;;  m
+    ;;  "chromatic-scales"
+    ;;  (emit-str (gxml/gen-sheet-music scale-vector scale-name m)))
+    ))
 
 (defn minor-scale-page [scale-name note m]
   (let [notes (nvr/get-notes note)
