@@ -67,16 +67,6 @@
         chord-vector (gxml/chord-vector notes)]
     (emit-str (gxml/gen-sheet-music chord-vector chord-name m))))
 
-(defn x1-page [x1]
-  (cond (= x1 "major-scales")
-        (pg/major-scale-nav-page gdefs/valid-scale-notes)
-
-        (= x1 "random-sheet-music-generator")
-        (rsmg/rsmg)
-
-        :else
-        (pg/major-scale-nav-page gdefs/valid-scale-notes)))
-
 (defn build-scales [s]
   (for [note gdefs/valid-scale-notes]
     (apply str note "-" s)))
@@ -97,13 +87,6 @@
        (if (valid-chromatic-scale? scale)
          (chromatic-scale-page scale m))))
 
-(defroutes musician-page
-  (GET "/:musician-id" [musician-id]
-       (if (not
-            (empty?
-             (sql/get-musician-id sql/db {:musician_id musician-id})))
-         (mrp/musician-review-page musician-id))))
-
 (defroutes blog-page
   (GET "/:blog-id" [blog-id]
        (if (not
@@ -112,13 +95,11 @@
          (bpg/blog-page blog-id))))
 
 (defn valid-x1-route? [x1]
-  (if (contains? vxm/valid-xn-map x1)
-    (x1-page x1)))
+  (contains? vxm/valid-xn-map x1))
 
 (defn valid-x2-route? [x1 x2]
-  (if (and (contains? vxm/valid-xn-map x1)
-           (some #(= x2 %) (vxm/valid-xn-map x1)))
-    (x1-page x1)))
+  (and (contains? vxm/valid-xn-map x1)
+       (some #(= x2 %) (vxm/valid-xn-map x1))))
 
 (defn valid-x3-route? [x1 x2 x3 m]
   (let [x2-conv (minor-converter-map x2)]
@@ -136,9 +117,6 @@
 
   (GET "/sidenav" []
        (json/write-str (sidenav/side-nav)))
-
-  (GET "/:x1" [x1]
-       (valid-x1-route? x1))
 
   (GET "/:x1/:x2" [x1 x2]
        (valid-x2-route? x1 x2))
@@ -163,6 +141,8 @@
   (GET "/about" [] (abt/about))
 
   (GET "/lab" [] (lab/lab-page))
+
+  (GET "/lab/random-sheet-music-generator" [] (json/write-str {:rsmg "RSMG22"}))
   
   (GET "/lab/generate-sheet-music" [] (lab-gsm/lab-page))
   (POST "/lab/generate-sheet-music" {m :form-params}

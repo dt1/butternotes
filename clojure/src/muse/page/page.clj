@@ -68,6 +68,66 @@
       k)))
 
 
+(defn create-sublinks-helper [stype scl]
+  [:ul.menu
+   (for [n major-links-vec]
+     [:li [:a {:href (c-str/replace
+                      (str "/"
+                           (first scl)
+                           "/"
+                           stype
+                           "/"
+                           n
+                           "-"
+                           (apply str (butlast stype)))
+                      #"\/\/" "/")}
+           (-> n
+               (c-str/replace #"-" "")
+               (c-str/replace #"flat" "&#9837;")
+               (c-str/replace #"sharp" "&#9839;"))]])])
+
+(defn create-sublinks [stype]
+  (let [scl (getscale stype)]
+    [:div [:span
+           (-> stype
+               (utils/capitalize-string)
+               (c-str/replace "-" " ")
+               (str ":"))]
+     (create-sublinks-helper stype scl)]))
+
+;; (defn create-diminished-sublinks [stype]
+;;   (let [scl (getscale stype)]
+;;     [:div [:span (str (c-str/replace
+;;                        (utils/capitalize-string stype)
+;;                        #"-" " ") ":")]
+;;      [:ul.menu
+;;       (for [n dim-links-vec]
+;;         [:li [:a {:href (c-str/replace
+;;                          (str "/"
+;;                               (first scl)
+;;                               "/"
+;;                               stype
+;;                               "/"
+;;                               n
+;;                               "-"
+;;                               (apply str (butlast stype)))
+;;                          #"\/\/" "/")}
+;;               (-> n
+;;                   (c-str/replace #"-" "")
+;;                   (c-str/replace #"flat" "&#9837;")
+;;                   (c-str/replace #"sharp" "&#9839;"))]])]]))
+
+;; (defn create-diminished-sublinks [scale-type]
+;;   (let [sv (scale-paths scale-type)]
+;;     [:div [:span (apply str (sv 0) ":")]
+;;      [:ul.menu
+;;       (for [n dim-links-vec]
+;;         [:li [:a {:href (apply str (sv 1) n (sv 2))}
+;;               (-> n
+;;                   (c-str/replace #"-" "")
+;;                   (c-str/replace #"flat" "&#9837;")
+;;                   (c-str/replace #"sharp" "&#9839;"))]])]]))
+
 (defn build-ad-list []
   (let [apple-ad (first (sql/get-one-apple-ad sql/db))
         amazon-ad (first (sql/get-one-amazon-ad sql/db))]
@@ -112,6 +172,9 @@
        [:p [:b "Relative Minor for the " (note-to-str note)]]
        [:p [:a {:href (gen-minor-url dnotes)}
             (gen-minor-link dnotes)]]]]]]])
+
+(defn chromatic-links []
+  )
 
 (def tonics ["tonic"
              "supertonic"
@@ -166,3 +229,21 @@
        :aria-labelledby "panel1d-heading"}
       [:button {:onclick "download()"
                 :class "button"} "Download MusicXML"]]]]])
+
+(defn html-wrapper [heading content]
+  (html5
+   {:class "no-js" :lang "en" :dir "ltr"}
+   heading
+   [:body
+    [:div.row
+     [:div.row]
+     [:div.medium-2.columns
+      (snav/side-nav)]
+     [:div.medium-10.columns
+      content]]]))
+
+
+
+(def diatonic-list ["ionian" "dorian" "phrygian" "lydian"
+                    "mixolydian"
+                    "aeolian" "locrian"])

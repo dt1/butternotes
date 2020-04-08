@@ -9,6 +9,7 @@ Vue.config.productionTip = false
 // page imports
 import Notation from '@/components/Notation'
 import HomePage from '@/components/HomePage'
+import Rsmg from '@/components/Rsmg'
 
 // nav imports
 import NoteMenu from '@/components/NoteMenu'
@@ -26,6 +27,11 @@ const router =  new VueRouter({
         { path: '/',
           components: {
               maininfo: HomePage
+          }
+        },
+        { path: '/lab/random-sheet-music-generator',
+          components: {
+              maininfo: Rsmg
           }
         },
         { path: '/:scale/:stype/',
