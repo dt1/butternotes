@@ -8,7 +8,7 @@
             [muse.page.head :as mhd]))
 
 (defn lab-page [& arr]
-  (pg/html-wrapper
+  
 
    [:head 
     [:title "Butter Notes | Lab, recording"]
@@ -50,4 +50,4 @@ does not effect recording volume):"]
     [:h5 "Log"]
     [:pre#log]
     [:script {:src "/recorder/lab_record.js"}]
-    ]))
+    ])

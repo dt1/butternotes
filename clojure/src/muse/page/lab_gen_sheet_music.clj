@@ -50,7 +50,7 @@
 
 (defn lab-page [& arr]
   (prn arr)
-  (pg/html-wrapper
+  
 
    [:head 
     [:title "Butter Notes | Lab, generate sheet music"]
@@ -125,4 +125,4 @@ else {
    document.playForm.submit();
 }});
 
-"]]))
+"]])

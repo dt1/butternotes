@@ -8,7 +8,7 @@
 
 (defn blog-list-page []
   (let [blog-titles (sql/get-blog-titles sql/db)]
-    (pg/html-wrapper
+    
 
      [:head 
       [:title "Butter Notes | Blog Listing"]
@@ -21,4 +21,4 @@
       (for [i blog-titles]
         [:div           
          [:p [:a {:href (str "/blog/" (:blog_id i))}
-              (:blog_title i)]]])])))
+              (:blog_title i)]]])]))

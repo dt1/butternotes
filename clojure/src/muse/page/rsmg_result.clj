@@ -7,7 +7,7 @@
             [muse.page.utils.playscale :as pscale]))
 
 (defn random-music-generator-result [&x &y]
-  (pg/html-wrapper
+  
 
    [:head 
     [:title (str "Butter Notes | RSMG Result")]
@@ -48,4 +48,4 @@
     a.href = \"data:text/xml,\" + document.getElementById(\"test-div\").innerHTML;
     a.click();
 }
-"]]))
+"]])

@@ -81,7 +81,7 @@
              :required "true"}]]])
 
 (defn rsmg []
-  (pg/html-wrapper
+  
 
    [:head 
     [:title (str "Butter Notes | Random Sheet Music Generator")]
@@ -104,4 +104,4 @@
      [:p "All Quarter Notes;"]
      [:p "(options coming soon!)"]]
     (anti-forgery-field)
-    [:input {:type "submit" :value "Go Go Go!" :class "button"}]]))
+    [:input {:type "submit" :value "Go Go Go!" :class "button"}]])

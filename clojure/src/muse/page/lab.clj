@@ -8,7 +8,7 @@
             [muse.page.head :as mhd]))
 
 (defn lab-page [& arr]
-  (pg/html-wrapper
+  
 
    [:head 
     [:title "Butter Notes | Lab"]
@@ -30,4 +30,4 @@
     [:p [:a {:href "/lab/generate-sheet-music"}
          "Generate Sheet Music"]]
 
-    [:p [:a {:href "/lab/record-to-file"} "Record to File"]]]))
+    [:p [:a {:href "/lab/record-to-file"} "Record to File"]]])

@@ -6,7 +6,7 @@
             [muse.page.head :as mhd]))
 
 (defn metronome-page []
-  (pg/html-wrapper
+  
 
    [:head 
     [:title "Butter Notes | Metronome"]
@@ -129,4 +129,4 @@ function startMetronome() {
 }
 }
       
-"]]))
+"]])

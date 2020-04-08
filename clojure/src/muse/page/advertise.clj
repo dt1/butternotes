@@ -6,7 +6,7 @@
             [muse.page.head :as mhd]))
 
 (defn advertise []
-  (pg/html-wrapper
+  
 
    [:head 
     [:title "Butter Notes | About"]
@@ -51,4 +51,4 @@ allowed to replace or go against the base impression fee."]
      [:a {:href "mailto:david.t@butternotes.com?subject=advertise&body=Hello, David;"} "david.t@butternotes.com"]]
 
     [:p "Please include an image of your ad with the URL you would like to link to. 
-After approval, I will contact you and set your account up."]]))
+After approval, I will contact you and set your account up."]])

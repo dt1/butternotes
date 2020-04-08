@@ -9,7 +9,7 @@
 (defn blog-page [blog-id]
   (let [blog-info (first
                    (sql/blog-content sql/db {:blog_id blog-id}))]
-    (pg/html-wrapper
+    
 
      [:head 
       [:title (str "Butter Notes | " (:blog_title blog-info))]
@@ -20,4 +20,4 @@
      [:div.row
       [:h1 {:style "font-size: 2em;"}
        (:blog_title blog-info)]
-      (:blog_content blog-info)])))
+      (:blog_content blog-info)]))

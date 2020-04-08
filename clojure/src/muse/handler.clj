@@ -18,15 +18,10 @@
             [muse.page.homepage :as hmp]
             [muse.layout.sidenav :as sidenav]
             [muse.page.about :as abt]
-            [muse.page.newsletter :as nsr]
             [muse.page.four_oh_four :as fof]
             [muse.page.advertise :as adv]
             [muse.page.blog_page :as bpg]
             [muse.page.blog_listing :as blist]
-            [muse.page.musician_review_page :as mrp]
-            [muse.page.explore_music_page :as emp]
-            [muse.page.music_main_page :as mmp]
-            [muse.page.my_music :as mym]
             [muse.page.chord_page :as cpg]
             [muse.page.rsmg_form :as rsmg]
             [muse.page.rsmg_result :as rsmgr]
@@ -34,9 +29,6 @@
             [muse.page.lab_gen_sheet_music :as lab-gsm]
             [muse.page.lab_record_to_file :as lab-rtf]
             [muse.page.metronome :as mtn]
-            [muse.page.help_wanted :as help]
-            [muse.page.beta_signup :as pbs]
-            [muse.page.login :as plg]
 
             [muse.valid_xn_map :as vxm]
 
@@ -168,8 +160,6 @@
            (emit-str random-xml)
            sound-vec)))
 
-  (GET "/newsletter" [] (nsr/sign-up))
-
   (GET "/about" [] (abt/about))
 
   (GET "/lab" [] (lab/lab-page))
@@ -184,17 +174,7 @@
 
   (GET "/metronome" [] (mtn/metronome-page))
 
-  (GET "/music" [] (mmp/music-main-page))
-  (GET "/music/my-music" [] (mym/my-music-page))
-  (GET "/music/explore" [] (emp/explore-musician-page))
-  (context "/music/explore" [] musician-page)
-
   (GET "/advertise" [] (adv/advertise))
-
-  (GET "/help-wanted" [] (help/help-wanted))
-
-  (GET "/xml/sitemap" []
-       (resp/redirect "https://s3-us-west-1.amazonaws.com/butternotes/xml/sitemap.xml"))
 
   (route/not-found (fof/four-oh-four)))
 

@@ -6,7 +6,6 @@
             [muse.page.head :as mhd]))
 
 (defn about []
-  (pg/html-wrapper
    
    [:head 
     [:title "Butter Notes | About"]
@@ -57,4 +56,4 @@ I'm not sure how possible it will be, but hey, it's a goal."]
     [:p "Sorry, the budget for this project is currently my time and hosting fees."]
     [:p "If you are someone looking for something to build up his or her portfolio, then by all means, contact me if you want to do
 pro bono or deferred payment. When I do have the budget for a designer, I'll post about here. I'd rather pay someone who is starting out than a 
-company, not because I'm cheap, but altruistic."]]))
+company, not because I'm cheap, but altruistic."]])

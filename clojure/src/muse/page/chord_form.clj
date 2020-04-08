@@ -127,7 +127,7 @@
          [:input.button {:type "submit" :value "Submit"}]]]]]]]])
 
 (defn chord-page [chord-type chord-name m &w]
-  (pg/html-wrapper
+  
 
    [:head 
     [:title (str "Butter Notes | " chord-name)]
@@ -142,4 +142,4 @@
       [:div#notation.medium-12.columns]
      (chord-form chord-name chord-type m)
      [:div#test-div {:style "display:none"}
-      &w]]))
+      &w]])
