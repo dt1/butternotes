@@ -4,7 +4,10 @@ function handleFileSelect(xml) {
     var openSheetMusicDisplay = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas",
                                                                                 {backend: "svg",
                                                                                  drawFromMeasureNumber: 1,
-                                                                                 drawUpToMeasureNumber: Number.MAX_SAFE_INTEGER}
+                                                                                 drawUpToMeasureNumber: Number.MAX_SAFE_INTEGER,
+                                                                                 drawPartNames: false
+                                                                                },
+                                                                                
                                                                                );
 
 

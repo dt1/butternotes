@@ -1,8 +1,5 @@
 <template>
-<div>
   <div id="osmdCanvas"></div>
-
-</div>
 </template>
 
 <script>
@@ -15,19 +12,28 @@ return {
 notation: null,
 }
 },
+
 async mounted () {
 let scale = this.$route.params.scale;
 let stype = this.$route.params.stype;
-console.log(scale);
-console.log(stype);
-const result = await axios
-      .get(`http://localhost:3000/${scale}/${stype}`)
+let ntype = this.$route.params.ntype;
+
+let result;
+
+if (ntype) {
+result = await axios
+    .get(`http://localhost:3000/${scale}/${stype}/${ntype}`);
+} else {
+result = await axios
+    .get(`http://localhost:3000/${scale}/${stype}`);
+}
 this.notation = result;
 this.$nextTick(); // wait for re-render
-// XmlJs(this.$ref.xml); // pass DOM element to third-party renderer
-// handleFileSelect();
 handleFileSelect(this.notation.data);
-}})
+console.log(this.notation.data)
+}
+
+})
 
 
 </script>

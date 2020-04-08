@@ -1,5 +1,14 @@
 <template>
-  <p> {{ info.data.homepage }}</p>
+<div>
+  {{ info.data.homepage }}
+  
+  <p>This site is built using Clojure on the backend and VueJs on the front-end.</p>
+  
+  <p>You can find the source code on my github here:
+    <a href="https://github.com/dt1/butternotes">butternotes source</a>
+  </p>
+  
+</div>
 </template>
 
 <script>

@@ -15,7 +15,10 @@
   <div class="grid-x">
 
     <side-nav class="cell small-3"/>
-    <router-view name="maininfo" class="cell small-9"></router-view>
+    <div class="cell small-9">
+      <router-view name="notemenu" :key="$route.fullPath"></router-view>
+      <router-view name="maininfo" :key="$route.fullPath"></router-view>
+    </div>
   </div>
 </div>
 </template>

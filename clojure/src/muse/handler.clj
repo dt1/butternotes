@@ -58,47 +58,22 @@
 (defn major-scale-page [scale-name m]
   (let [notes (nvr/get-notes scale-name)
         scale-vector (gxml/scale-vector notes "major-scale")]
-    (pg/scale-page
-     scale-name
-     (gxml/diatonic-links scale-vector)
-     (svr/scale-sound-vector scale-vector)
-     m
-     "major-scales"
-     (emit-str (gxml/gen-sheet-music scale-vector scale-name m)))))
+    (emit-str (gxml/gen-sheet-music scale-vector scale-name m))))
 
 (defn chromatic-scale-page [scale-name m]
   (let [notes (nvr/get-notes scale-name)
         scale-vector (gxml/scale-vector notes "chromatic-scale")]
-    (emit-str (gxml/gen-sheet-music scale-vector scale-name m))
-    ;; (pg/scale-page
-    ;;  scale-name
-    ;;  ""
-    ;;  (svr/scale-sound-vector scale-vector)
-    ;;  m
-    ;;  "chromatic-scales"
-    ;;  (emit-str (gxml/gen-sheet-music scale-vector scale-name m)))
-    ))
+    (emit-str (gxml/gen-sheet-music scale-vector scale-name m))))
 
 (defn minor-scale-page [scale-name note m]
   (let [notes (nvr/get-notes note)
         scale-vector (gxml/scale-vector notes scale-name)]
-    (pg/scale-page
-     scale-name
-     ""
-     (svr/scale-sound-vector scale-vector)
-     m
-     scale-name
-     (emit-str (gxml/gen-sheet-music scale-vector note m)))))
+    (emit-str (gxml/gen-sheet-music scale-vector note m))))
 
 (defn chord-page [chord-type chord-name m]
   (let [notes (nvr/get-notes chord-name)
         chord-vector (gxml/chord-vector notes)]
-    (cpg/chord-page
-     chord-type
-     chord-name
-     m
-     (emit-str
-      (gxml/gen-sheet-music chord-vector chord-name m)))))
+    (emit-str (gxml/gen-sheet-music chord-vector chord-name m))))
 
 (defn x1-page [x1]
   (cond (= x1 "major-scales")
@@ -109,9 +84,6 @@
 
         :else
         (pg/major-scale-nav-page gdefs/valid-scale-notes)))
-
-(defn home-page []
-  (hmp/home-page))
 
 (defn build-scales [s]
   (for [note gdefs/valid-scale-notes]
@@ -168,11 +140,7 @@
 
 (defroutes app-routes
   (GET "/" []
-       (json/write-str (home-page))
-       (home-page))
-
-  (GET "/homepage" []
-       (json/write-str (home-page)))
+       (json/write-str (hmp/home-page)))
 
   (GET "/sidenav" []
        (json/write-str (sidenav/side-nav)))

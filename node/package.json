@@ -13,6 +13,7 @@
     "foundation-sites": "^6.6.2",
     "jquery": "^3.4.1",
     "vue": "^2.6.11",
+    "vue-multilevel-accordion": "^1.0.8",
     "vue-router": "^3.1.6",
     "vue-tree-navigation": "^4.0.1",
     "what-input": "^5.2.7"

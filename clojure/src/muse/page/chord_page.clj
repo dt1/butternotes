@@ -125,32 +125,3 @@
        [:div.row
         [:div.medium-12.columns
          [:input.button {:type "submit" :value "Submit"}]]]]]]]])
-
-(defn chord-page [chord-type chord-name m &w]
-  (pg/html-wrapper
-
-   [:head 
-    [:title (str "Butter Notes | " chord-name)]
-    [:meta {:description "Butter Notes Blog Page"}]
-    (for [hh ["global" "abcweb"]
-          :let [x (mhd/headers {:head-type hh})]]
-      (for [xx x]
-        xx))]
-        
-   [:div.row    
-    (pg/create-sublinks chord-type)
-    [:button {:onclick "download()"
-              :class "button"} "Download MusicXML"]
-     [:div#notation.medium-12.columns]     
-     (chord-form chord-name chord-type m)
-     [:div#test-div {:style "display:none"}
-      &w]
-        [:script "function download(){
-    var a = document.body.appendChild(
-        document.createElement(\"a\")
-    );
-    a.download = \"random-sheet-music.xml.\";
-    a.href = \"data:text/xml,\" + document.getElementById(\"test-div\").innerHTML;
-    a.click();
-}
-"]]))

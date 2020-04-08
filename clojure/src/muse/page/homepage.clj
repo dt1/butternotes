@@ -6,5 +6,6 @@
             [muse.page.head :as mhd]))
 
 (defn home-page []
-  {:homepage "reviving this site. Please feel free to try out the items to the 
-left. Most of it is working again."})
+  {:homepage
+    "reviving this site. Please feel free to try out the items to the 
+left. The Scales and Modes are working."})

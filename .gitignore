@@ -1,0 +1,10 @@
+#*
+*~
+node/node_modules/
+node/package-lock.json
+node/dist/
+*DS_Store
+clojure/src/muse/db/conn.clj
+.lein-env
+clojure/target/
+.lein-repl-history

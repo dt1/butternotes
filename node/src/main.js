@@ -10,6 +10,9 @@ Vue.config.productionTip = false
 import Notation from '@/components/Notation'
 import HomePage from '@/components/HomePage'
 
+// nav imports
+import NoteMenu from '@/components/NoteMenu'
+
 // component imports and registration
 import { FoundationCSS } from  '@/../node_modules/foundation-sites/dist/css/foundation.min.css'
 Vue.component('foundation-css', FoundationCSS)
@@ -25,8 +28,15 @@ const router =  new VueRouter({
               maininfo: HomePage
           }
         },
-        { path: '/:scale/:stype',
+        { path: '/:scale/:stype/',
           components: {
+              notemenu: NoteMenu,
+              maininfo: Notation
+          }
+        },
+        { path: '/:scale/:stype/:ntype',
+          components: {
+              notemenu: NoteMenu,
               maininfo: Notation
           }
         }

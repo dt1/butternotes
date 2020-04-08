@@ -16,15 +16,6 @@
             [muse.page.utils.playscale :as pscale]
             [muse.utils.utils :as utils]))
 
-(def jquery-load
-  [:script "
-   $(document).ready(function() {
-     $(document).foundation();
-   })"])
-
-(def xml-loader
-  [:script {:src "/js/osmd/xml-loader.js"}])
-
 (defn note-to-str [s]
   (utils/capitalize-string
    (c-str/replace s #"-" " ")))
@@ -77,66 +68,6 @@
       k)))
 
 
-(defn create-sublinks-helper [stype scl]
-  [:ul.menu
-   (for [n major-links-vec]
-     [:li [:a {:href (c-str/replace
-                      (str "/"
-                           (first scl)
-                           "/"
-                           stype
-                           "/"
-                           n
-                           "-"
-                           (apply str (butlast stype)))
-                      #"\/\/" "/")}
-           (-> n
-               (c-str/replace #"-" "")
-               (c-str/replace #"flat" "&#9837;")
-               (c-str/replace #"sharp" "&#9839;"))]])])
-
-(defn create-sublinks [stype]
-  (let [scl (getscale stype)]
-    [:div [:span
-           (-> stype
-               (utils/capitalize-string)
-               (c-str/replace "-" " ")
-               (str ":"))]
-     (create-sublinks-helper stype scl)]))
-
-;; (defn create-diminished-sublinks [stype]
-;;   (let [scl (getscale stype)]
-;;     [:div [:span (str (c-str/replace
-;;                        (utils/capitalize-string stype)
-;;                        #"-" " ") ":")]
-;;      [:ul.menu
-;;       (for [n dim-links-vec]
-;;         [:li [:a {:href (c-str/replace
-;;                          (str "/"
-;;                               (first scl)
-;;                               "/"
-;;                               stype
-;;                               "/"
-;;                               n
-;;                               "-"
-;;                               (apply str (butlast stype)))
-;;                          #"\/\/" "/")}
-;;               (-> n
-;;                   (c-str/replace #"-" "")
-;;                   (c-str/replace #"flat" "&#9837;")
-;;                   (c-str/replace #"sharp" "&#9839;"))]])]]))
-
-;; (defn create-diminished-sublinks [scale-type]
-;;   (let [sv (scale-paths scale-type)]
-;;     [:div [:span (apply str (sv 0) ":")]
-;;      [:ul.menu
-;;       (for [n dim-links-vec]
-;;         [:li [:a {:href (apply str (sv 1) n (sv 2))}
-;;               (-> n
-;;                   (c-str/replace #"-" "")
-;;                   (c-str/replace #"flat" "&#9837;")
-;;                   (c-str/replace #"sharp" "&#9839;"))]])]]))
-
 (defn build-ad-list []
   (let [apple-ad (first (sql/get-one-apple-ad sql/db))
         amazon-ad (first (sql/get-one-amazon-ad sql/db))]
@@ -158,32 +89,6 @@
       {:href (:ad_link image-ad)
        :style "padding:0;"}
       [:img {:src (:ad_image image-ad)}]]]))
-
-(defn top-row []
-  [:div.row
-   [:div.medium-2.columns
-    [:h1 {:style "font-size: 1em;"}
-     [:a.black {:href "/"} "unknown"]
-     [:br]
-     [:small.black "Explore & Practice Music."]]]
-   ;; [:div.medium-5.columns
-   ;;  [:ul.menu
-   ;;   [:li [:a.fi-mail.black
-   ;;         {:href "/newsletter"
-   ;;          :style "font-size:24px;"}]]
-   ;;   [:li [:a.fi-social-twitter.black
-   ;;         {:href "https://twitter.com/ButternotesWeb"
-   ;;          :style "font-size:30px;"}]]
-   ;;   [:li [:a.fi-social-facebook.black
-   ;;         {:href "https://www.facebook.com/butternotesweb"
-   ;;          :style "font-size:30px;"}]]
-   ;;   ;; [:li [:a.fi-social-pinterest.black
-   ;;   ;;       {:href "https://www.pinterest.com/butternotes/"
-   ;;   ;;        :style "font-size:30px;"}]]
-   ;;   [:li [:a.fi-social-youtube.black
-   ;;         {:href "https://www.youtube.com/channel/UCeOcCGyn5LFXcaZbNCEvg1w"
-   ;;          :style "font-size:30px;"}]]]]
-   (build-image-ad)])
 
 (defn mode-links [note dnotes]
   [:div.medium-12.columns
@@ -207,9 +112,6 @@
        [:p [:b "Relative Minor for the " (note-to-str note)]]
        [:p [:a {:href (gen-minor-url dnotes)}
             (gen-minor-link dnotes)]]]]]]])
-
-(defn chromatic-links []
-  )
 
 (def tonics ["tonic"
              "supertonic"
@@ -264,151 +166,3 @@
        :aria-labelledby "panel1d-heading"}
       [:button {:onclick "download()"
                 :class "button"} "Download MusicXML"]]]]])
-
-(defn html-wrapper [heading content]
-  (html5
-   {:class "no-js" :lang "en" :dir "ltr"}
-   heading
-   [:body
-    [:div.row
-     [:div.row
-      (top-row)]
-     [:div.medium-2.columns
-      (snav/side-nav)]
-     [:div.medium-10.columns
-      content]]
-    jquery-load]))
-
-(defn scale-page [note dnotes scl m scale-type &w]
-  (html-wrapper
-   (mhd/head note)
-   [:div.medium-10.columns
-    [:div.row
-     (if (= scale-type "chromatic-scales")
-       (chromatic-links)
-       (create-sublinks scale-type))]
-    [:div.row
-     [:div.medium-10.columns
-      [:div.row
-       [:div.medium-4.columns
-        [:a#playstop {:href "#"
-                      :style "font-size:2em; color:black"}
-         "&#9656; (play)"]]
-       [:div.medium-3.columns
-        "BPM: "
-        [:input {:id "bpmbox"
-                 :type "number"
-                 :value "60"
-                 :onchange "changeBPM(this)"}]]]]
-     [:div.medium-5.columns ""]
-
-     [:div.medium-12.columns
-      [:div#osmdCanvas]]
-     (download-musicxml)
-     (show-notes scl scale-type)
-     (ppi/pattern scale-type)
-     (if (and (not= dnotes "theory")
-              (= scale-type "major-scales"))
-       (mode-links note dnotes))
-     (scm/scale-form m scale-type)]
-    [:div#xml; {:style "display:none"}
-     &w]
-    (pscale/play-scale scl)
-    xml-loader
-    ;; [:script "function download(){
-;;     var a = document.body.appendChild(
-;;         document.createElement(\"a\")
-;;     );
-;;     a.download = \"random-sheet-music.xml.\";
-;;     a.href = \"data:text/xml,\" + document.getElementById(\"test-div\").innerHTML;
-;;     a.click();
-;; }
-;; "]
-    ]))
-
-(defn major-scale-nav-page [notes]
-  (html5
-   {:class "no-js" :lang "en" :dir "ltr"}
-   (mhd/head "major")
-   [:body
-    (top-row)
-    [:div.row
-     (snav/side-nav)
-     [:div.medium-10.columns
-      [:h1 "Major Scales"]
-      [:div.medium-12.columns
-       (for [x notes]
-         [:p [:a {:href (apply str "/major-scales/" x
-                               "-major-scale")}
-              (note-to-str x)]])]]]]
-   jquery-load
-   xml-loader)
-  )
-
-(def diatonic-list ["ionian" "dorian" "phrygian" "lydian"
-                    "mixolydian"
-                    "aeolian" "locrian"])
-
-(defn diatonic-scale-nav-page []
-  (html5
-   {:class "no-js" :lang "en" :dir "ltr"}
-   (mhd/head "head")
-   [:body
-    (top-row)
-    [:div.row
-     (snav/side-nav)
-     [:div.medium-10.columns
-      [:h1 "Diatonic Scales"]
-      [:div.medium-9.columns
-       (for [x diatonic-list]
-         [:p [:a {:href (apply str "/diatonic-scales/" x
-                               "-scales")}
-              (note-to-str x)]])]]]]
-   jquery-load))
-
-(defn diatonic-scale-subnav-page [notes scale-type]
-  (html5
-   {:class "no-js" :lang "en" :dir "ltr"}
-   (mhd/head "header")
-   [:body
-    (top-row)
-    [:div.row
-     (snav/side-nav)
-     [:div.medium-10.columns
-      [:h1 (c-str/capitalize scale-type) " Scales"]
-      [:div.medium-9.columns
-       (for [x notes]
-         [:p [:a {:href (apply str "/diatonic-scales/" scale-type "/" x
-                               "-" (apply str (drop-last scale-type)))}
-              (note-to-str x)]])]]]]
-   jquery-load))
-
-(defn mode-scale-nav-page []
-  (html5
-   {:class "no-js" :lang "en" :dir "ltr"}
-   (mhd/head "header")
-   [:body
-    (top-row)
-    [:div.row
-     (snav/side-nav)
-     [:div.medium-10.columns
-      [:h1 "Modes"]
-      [:div.medium-9.columns
-       (for [x diatonic-list]
-         [:p [:a {:href (apply str "/modes/" x
-                               "-modes")}
-              (note-to-str x)]])]]]]
-   jquery-load))
-
-(defn mode-scale-subnav-page [notes scale-type]
-  (html-wrapper
-   (mhd/head "header")
-   [:div.medium-10.columns
-    [:h1 (c-str/capitalize
-          (c-str/replace scale-type #"-" " "))]
-    [:div.medium-9.columns
-     (for [x notes]
-       [:p [:a {:href (apply str "/modes/" scale-type "/" x
-                             "-"
-                             (apply str (drop-last scale-type)))}
-            (note-to-str x)]])]]))
