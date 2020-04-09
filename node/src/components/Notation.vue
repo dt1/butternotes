@@ -1,5 +1,10 @@
 <template>
-  <div id="osmdCanvas"></div>
+  <div>
+    {{ sounds }}
+    
+<div id="osmdCanvas">
+</div>
+</div>
 </template>
 
 <script>
@@ -10,6 +15,7 @@ export default ({
 data () {
 return {
 notation: null,
+sounds: null
 }
 },
 
@@ -27,10 +33,10 @@ result = await axios
 result = await axios
     .get(`http://localhost:3000/${scale}/${stype}`);
 }
-this.notation = result;
+this.sounds = result.data.sound;
+this.notation = result.data.xml;
 this.$nextTick(); // wait for re-render
-handleFileSelect(this.notation.data);
-console.log(this.notation.data)
+handleFileSelect(this.notation);
 }
 
 })

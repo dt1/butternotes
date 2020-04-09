@@ -50,42 +50,29 @@
 (defn major-scale-page [scale-name m]
   (let [notes (nvr/get-notes scale-name)
         scale-vector (gxml/scale-vector notes "major-scale")]
-    (emit-str (gxml/gen-sheet-music scale-vector scale-name m))))
+    {:xml (emit-str (gxml/gen-sheet-music scale-vector scale-name m))
+     :sound (svr/scale-sound-vector scale-vector)}))
 
 (defn chromatic-scale-page [scale-name m]
   (let [notes (nvr/get-notes scale-name)
         scale-vector (gxml/scale-vector notes "chromatic-scale")]
-    (emit-str (gxml/gen-sheet-music scale-vector scale-name m))))
+    {:xml (emit-str (gxml/gen-sheet-music scale-vector scale-name m))
+     :sound (svr/scale-sound-vector scale-vector)}))
 
 (defn minor-scale-page [scale-name note m]
   (let [notes (nvr/get-notes note)
         scale-vector (gxml/scale-vector notes scale-name)]
-    (emit-str (gxml/gen-sheet-music scale-vector note m))))
+    {:xml (emit-str (gxml/gen-sheet-music scale-vector note m))
+     :sound (svr/scale-sound-vector scale-vector)}))
 
 (defn chord-page [chord-type chord-name m]
   (let [notes (nvr/get-notes chord-name)
         chord-vector (gxml/chord-vector notes)]
-    (emit-str (gxml/gen-sheet-music chord-vector chord-name m))))
+    {:xml (emit-str (gxml/gen-sheet-music chord-vector chord-name m))}))
 
 (defn build-scales [s]
   (for [note gdefs/valid-scale-notes]
     (apply str note "-" s)))
-
-(defn valid-major-scale? [scale]
-  (some #(= scale %) (build-scales "major-scale")))
-
-(defn valid-chromatic-scale? [scale]
-  (some #(= scale %) (build-scales "chromatic-scale")))
-
-(defroutes major-scale-routes
-  (GET "/:scale" [scale & m]
-       (if (valid-major-scale? scale)
-         (major-scale-page scale m))))
-
-(defroutes chromatic-scale-routes
-  (GET "/:scale" [scale & m]
-       (if (valid-chromatic-scale? scale)
-         (chromatic-scale-page scale m))))
 
 (defroutes blog-page
   (GET "/:blog-id" [blog-id]
@@ -98,8 +85,10 @@
   (contains? vxm/valid-xn-map x1))
 
 (defn valid-x2-route? [x1 x2]
-  (and (contains? vxm/valid-xn-map x1)
-       (some #(= x2 %) (vxm/valid-xn-map x1))))
+  (if (and (contains? vxm/valid-xn-map x1))
+    (if (= x1 "major-scales")
+      (major-scale-page x2 nil)
+      (chromatic-scale-page x2 nil))))
 
 (defn valid-x3-route? [x1 x2 x3 m]
   (let [x2-conv (minor-converter-map x2)]
@@ -119,13 +108,11 @@
        (json/write-str (sidenav/side-nav)))
 
   (GET "/:x1/:x2" [x1 x2]
-       (valid-x2-route? x1 x2))
+       (json/write-str (valid-x2-route? x1 x2))
+       )
 
   (GET "/:x1/:x2/:x3" [x1 x2 x3 & m]
-       (valid-x3-route? x1 x2 x3 m))
-
-  (context "/major-scales" [] major-scale-routes)
-  (context "/chromatic-scales" [] chromatic-scale-routes)
+       (json/write-str (valid-x3-route? x1 x2 x3 m)))
 
   (GET "/blog" [] (blist/blog-list-page))
   (context "/blog" []  blog-page)

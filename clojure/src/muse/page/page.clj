@@ -13,7 +13,6 @@
 
             [muse.valid_xn_map :as vxm]
             [muse.db.conn :as sql]
-            [muse.page.utils.playscale :as pscale]
             [muse.utils.utils :as utils]))
 
 (defn note-to-str [s]
