@@ -7,8 +7,6 @@
             [muse.page.utils.playscale :as pscale]))
 
 (defn random-music-generator-result [&x &y]
-  
-
    [:head 
     [:title (str "Butter Notes | RSMG Result")]
     [:meta {:description "A Random Sheet Music Generator Result"}]

@@ -10,6 +10,7 @@
 <script>
 import axios from 'axios'
 import { handleFileSelect } from '@/../public/js/osmd/xml-loader.js'
+import { playScale } from '@/../public/js/wad/playscale.js'
 
 export default ({
 data () {
@@ -33,13 +34,20 @@ result = await axios
 result = await axios
     .get(`http://localhost:3000/${scale}/${stype}`);
 }
-this.sounds = result.data.sound;
 this.notation = result.data.xml;
 this.$nextTick(); // wait for re-render
 handleFileSelect(this.notation);
-}
 
-})
+this.sounds = JSON.parse(result.data.sound.replace(/'/g, '"'));
+playScale(this.sounds);
+
+
+
+
+console.log(this.sounds);
+console.log(typeof this.sounds);
+
+}})
 
 
 </script>
