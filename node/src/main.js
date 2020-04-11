@@ -7,18 +7,19 @@ Vue.use(VueRouter)
 Vue.config.productionTip = false
 
 // page imports
-import Notation from '@/components/Notation'
-import HomePage from '@/components/HomePage'
-import Rsmg from '@/components/Rsmg'
+import HomePage from '@/components/pages/HomePage'
+
+import Notation from '@/components/notation/Scales'
+import Rsmg from '@/components/notation/Rsmg'
 
 // nav imports
-import NoteMenu from '@/components/NoteMenu'
+import NoteMenu from '@/components/layout/NoteMenu'
 
 // component imports and registration
 import { FoundationCSS } from  '@/../node_modules/foundation-sites/dist/css/foundation.min.css'
 Vue.component('foundation-css', FoundationCSS)
 
-import SideNav from '@/components/SideNav'
+import SideNav from '@/components/layout/SideNav'
 Vue.component('side-nav', SideNav);
 
 const router =  new VueRouter({

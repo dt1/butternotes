@@ -104,6 +104,9 @@
   (GET "/" []
        (json/write-str (hmp/home-page)))
 
+  (GET "/homepage" []
+       (json/write-str (hmp/home-page)))
+
   (GET "/sidenav" []
        (json/write-str (sidenav/side-nav)))
 
