@@ -8,8 +8,8 @@ Vue.config.productionTip = false
 
 // page imports
 import HomePage from '@/components/pages/HomePage'
+import Notation from '@/components/pages/Scales'
 
-import Notation from '@/components/notation/Scales'
 import Rsmg from '@/components/notation/Rsmg'
 
 // nav imports

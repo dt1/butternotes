@@ -1,7 +1,7 @@
 <template>
 <ul class="menu">
   <li v-for="i in nav" :key="i[0]">
-    <router-link v-bind:to="i[1]" v-html="i[0]">{{ i[0] }}</router-link>
+    <router-link v-bind:to="i[1]" >{{ i[0] }}</router-link>
   </li>
 </ul>
 </template>
@@ -17,8 +17,8 @@ const notes = ["c", "c-sharp",
 "c-flat"]
 
 function toEntity(note) {
-note = note.replace("-sharp", "&#9839;");
-note = note.replace("-flat", "&#9837;");
+note = note.replace("-sharp", "♯");
+note = note.replace("-flat", "♭");
 return note
 }
 

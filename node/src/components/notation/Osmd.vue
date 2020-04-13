@@ -7,7 +7,7 @@
   
   export default ({
   name: "osmd",
-  props: [ "notation" ],
+props: [ "notation" ],
 
   async mounted () {
   handleFileSelect(this.notation);
