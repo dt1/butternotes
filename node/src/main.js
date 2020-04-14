@@ -15,9 +15,11 @@ import Rsmg from '@/components/notation/Rsmg'
 // nav imports
 import NoteMenu from '@/components/layout/NoteMenu'
 
-// component imports and registration
 import { FoundationCSS } from  '@/../node_modules/foundation-sites/dist/css/foundation.min.css'
 Vue.component('foundation-css', FoundationCSS)
+
+import Foundation from 'foundation-sites'
+Vue.prototype.$foundation = Foundation
 
 import SideNav from '@/components/layout/SideNav'
 Vue.component('side-nav', SideNav);

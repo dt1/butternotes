@@ -61,8 +61,6 @@ export default ({
             this.sounds = JSON.parse(result.data.sound.replace(/'/g, '"'));
         }
 
-        console.log("scale " + scale);
-        console.log(scale == "major-scales");
 
         if (scale == "major-scales") {
             this.modeList = this.sounds;

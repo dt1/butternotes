@@ -10,8 +10,8 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
-    "foundation-sites": "^6.6.2",
-    "jquery": "^3.4.1",
+    "foundation-sites": "^6.6.3",
+    "jquery": "^3.5.0",
     "vue": "^2.6.11",
     "vue-multilevel-accordion": "^1.0.8",
     "vue-router": "^3.1.6",
