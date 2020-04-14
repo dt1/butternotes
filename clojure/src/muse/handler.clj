@@ -18,14 +18,9 @@
             [muse.page.homepage :as hmp]
             [muse.layout.sidenav :as sidenav]
             [muse.page.about :as abt]
-            [muse.page.four_oh_four :as fof]
-            [muse.page.advertise :as adv]
-            [muse.page.blog_page :as bpg]
-            [muse.page.blog_listing :as blist]
             [muse.page.chord_page :as cpg]
             [muse.page.rsmg_form :as rsmg]
             [muse.page.rsmg_result :as rsmgr]
-            [muse.page.lab :as lab]
             [muse.page.lab_gen_sheet_music :as lab-gsm]
             [muse.page.lab_record_to_file :as lab-rtf]
             [muse.page.metronome :as mtn]
@@ -74,12 +69,14 @@
   (for [note gdefs/valid-scale-notes]
     (apply str note "-" s)))
 
-(defroutes blog-page
-  (GET "/:blog-id" [blog-id]
-       (if (not
-            (empty?
-             (sql/blog-content sql/db {:blog_id blog-id})))
-         (bpg/blog-page blog-id))))
+;; (defroutes blog-page
+;;   (GET "/:blog-id" [blog-id]
+;;        (if (not
+;;             (empty?
+;;              (sql/blog-content sql/db {:blog_id blog-id})))
+;;          (bpg/blog-page blog-id))))
+
+;; validate routes
 
 (defn valid-x1-route? [x1]
   (contains? vxm/valid-xn-map x1))
@@ -117,36 +114,33 @@
   (GET "/:x1/:x2/:x3" [x1 x2 x3 & m]
        (json/write-str (valid-x3-route? x1 x2 x3 m)))
 
-  (GET "/blog" [] (blist/blog-list-page))
-  (context "/blog" []  blog-page)
+  ;; (GET "/blog" [] (blist/blog-list-page))
+  ;; (context "/blog" []  blog-page)
 
-  (POST "/random-sheet-music-generator-result" {m :form-params}
-        (let [rsmg-vec (gxml/init-rsmg m)
-              random-xml (gxml/gen-random-sheet-music rsmg-vec m)
-              sound-vec (svr/scale-sound-vector rsmg-vec)]
-          (rsmgr/random-music-generator-result
-           (emit-str random-xml)
-           sound-vec)))
+  ;; (POST "/random-sheet-music-generator-result" {m :form-params}
+  ;;       (let [rsmg-vec (gxml/init-rsmg m)
+  ;;             random-xml (gxml/gen-random-sheet-music rsmg-vec m)
+  ;;             sound-vec (svr/scale-sound-vector rsmg-vec)]
+  ;;         (rsmgr/random-music-generator-result
+  ;;          (emit-str random-xml)
+  ;;          sound-vec)))
 
-  (GET "/about" [] (abt/about))
-
-  (GET "/lab" [] (lab/lab-page))
+  ;; (GET "/about" [] (abt/about))
 
   (GET "/lab/random-sheet-music-generator" [] (json/write-str {:rsmg "RSMG22"}))
   
-  (GET "/lab/generate-sheet-music" [] (lab-gsm/lab-page))
-  (POST "/lab/generate-sheet-music" {m :form-params}
-        (lab-gsm/lab-page m))
+  ;; (GET "/lab/generate-sheet-music" [] (lab-gsm/lab-page))
+  ;; (POST "/lab/generate-sheet-music" {m :form-params}
+  ;;       (lab-gsm/lab-page m))
 
-  (GET "/lab/record-to-file" [] (lab-rtf/lab-page))
-  (POST "/lab/record-to-file" {m :form-params}
-        (lab-rtf/lab-page m))
+  ;; (GET "/lab/record-to-file" [] (lab-rtf/lab-page))
+  ;; (POST "/lab/record-to-file" {m :form-params}
+  ;;       (lab-rtf/lab-page m))
 
-  (GET "/metronome" [] (mtn/metronome-page))
+  ;; (GET "/metronome" [] (mtn/metronome-page))
 
-  (GET "/advertise" [] (adv/advertise))
-
-  (route/not-found (fof/four-oh-four)))
+  (route/not-found "404" ;(fof/four-oh-four)
+                   ))
 
 (def app
   (-> (wrap-defaults app-routes site-defaults)

@@ -10,7 +10,6 @@
                  [org.clojure/math.numeric-tower "0.0.4"]
                  [org.postgresql/postgresql "42.2.10.jre7"]
                  [com.layerware/hugsql "0.5.1"]
-                 [hiccup "2.0.0-alpha2"]
 		 [cc.qbits/alia-joda-time "4.3.3"]	
                  [environ "1.1.0"]
                  [buddy/buddy-core "1.6.0"]
