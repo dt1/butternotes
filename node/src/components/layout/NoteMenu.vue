@@ -45,7 +45,7 @@ return res;
 }
 
 export default ({
-name: "note-menu"
+name: "note-menu",
 
 data () {
 return {
