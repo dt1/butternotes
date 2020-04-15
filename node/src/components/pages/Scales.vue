@@ -89,14 +89,12 @@ ScaleForm
                 .get(`http://localhost:3000/${scale}/${stype}`);
         }
 
-//         this.$nextTick(); // wait for re-render
+         this.$nextTick(); // wait for re-render
         this.notation = result.data.xml;
 
         if (result.data.sound) {
             this.sounds = JSON.parse(result.data.sound.replace(/'/g, '"'));
 }
-
-// this.$nextTick();
 
 
         if (scale == "major-scales") {

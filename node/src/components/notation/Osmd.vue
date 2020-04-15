@@ -1,5 +1,5 @@
 <template>
-<div oid="osmdCanvas"></div>
+<div id="osmdCanvas"></div>
 </template>
 
 <script>
