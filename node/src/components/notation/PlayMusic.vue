@@ -3,6 +3,9 @@
   <div>
     <a href="#" @click="play" style="font-size:2em; color:black" v-html="playButton"></a>
   </div>
+  <div>
+    <input type="number" value="60" @change="changeBpm($event)">
+  </div>
 </div>
 </template>
 
@@ -14,7 +17,7 @@ import { togglePlayButton } from '@/components/notation/utils/toggle-play-button
 export default ({
     name: "play-music",
 
-    props: [ "noteList" ],
+props: [ "noteList" ],
 
     data () {
         return {
@@ -22,7 +25,7 @@ export default ({
             playButton: "&#9656; (play)",
             tf: false,
             currentNote: 0,
-            bpm: 60, // document.getElementById('bpmbox').value
+            bpm: 60,
             pause: 60000 / 60, // this.bpm,
             sustain: 6000 / 60 / 2000 // this.pause / 2000
         }
@@ -52,7 +55,13 @@ export default ({
 
                 setTimeout(this.playscale, this.pause);
             }
-        }
+},
+
+changeBpm: function (event) {
+      this.bpm = event.target.value
+      this.pause = 60000 / this.bpm;
+      this.sustain = this.pause / 2000;
+}
 
 }
 })

@@ -42,6 +42,7 @@ import ShowNotes from '@/components/notation/ShowNotes'
 import MajorModes from '@/components/notation/MajorModes'
 import ScaleForm from '@/components/notation/ScaleForm'
 
+
 export default ({
     components: {
         PlayMusic,
@@ -49,7 +50,7 @@ export default ({
         DlMusicXml,
         ShowNotes,
         MajorModes,
-        ScaleForm
+ScaleForm
     },
 
     data () {
