@@ -1,4 +1,5 @@
 <template>
+
 <div id="app">
   <div class="grid-container fluid">
     <div class="grid-x grid-margin-x">
@@ -13,13 +14,13 @@
   </div>
   
   <div class="grid-x">
-
     <side-nav class="cell small-3"/>
     <div class="cell small-9">
       <router-view name="notemenu" :key="$route.fullPath"></router-view>
       <router-view name="maininfo" :key="$route.fullPath"></router-view>
     </div>
   </div>
+
 </div>
 </template>
 

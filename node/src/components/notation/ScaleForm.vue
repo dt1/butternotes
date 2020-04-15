@@ -1,5 +1,5 @@
 <template>
-<div>
+  <div>
   <img class="treble" :src="`${publicPath}img/clefs/treble-clef.svg`" />
   <img class="bass" :src="`${publicPath}img/clefs/bass-clef.svg`" />
   <img class="tenor" :src="`${publicPath}img/clefs/tenor-clef.svg`" />

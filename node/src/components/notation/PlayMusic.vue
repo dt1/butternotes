@@ -1,11 +1,13 @@
 <template>
-<div>
-  <div>
-    <a href="#" @click="play" style="font-size:2em; color:black" v-html="playButton"></a>
-  </div>
-  <div>
-    <input type="number" value="60" @change="changeBpm($event)">
-  </div>
+<div class="grid-x">
+    <div class="cell small-2 pad-top">
+      <a href="#" @click="play" style="font-size:2em; color:black" v-html="playButton"></a>
+    </div>
+    <div class="cell small-2 pad-top">
+      <input type="number" value="60" @change="changeBpm($event)">
+    </div>
+    <div class="cell small-8">
+    </div>
 </div>
 </template>
 
@@ -68,4 +70,10 @@ changeBpm: function (event) {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.pad-top {
+padding-top: 2em;
+}
+
+
+</style>

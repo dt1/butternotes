@@ -12,9 +12,6 @@ import Notation from '@/components/pages/Scales'
 
 import Rsmg from '@/components/notation/Rsmg'
 
-// nav imports
-import NoteMenu from '@/components/layout/NoteMenu'
-
 import { FoundationCSS } from  '@/../node_modules/foundation-sites/dist/css/foundation.min.css'
 Vue.component('foundation-css', FoundationCSS)
 
@@ -39,13 +36,11 @@ const router =  new VueRouter({
         },
         { path: '/:scale/:stype/',
           components: {
-              notemenu: NoteMenu,
               maininfo: Notation
           }
         },
         { path: '/:scale/:stype/:ntype',
           components: {
-              notemenu: NoteMenu,
               maininfo: Notation
           }
         }

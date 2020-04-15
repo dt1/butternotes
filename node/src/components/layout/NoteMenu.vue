@@ -45,6 +45,8 @@ return res;
 }
 
 export default ({
+name: "note-menu"
+
 data () {
 return {
 nav: null,
