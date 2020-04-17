@@ -3,7 +3,8 @@
             [clojure.math.numeric-tower :as math]
             [clojure.string :as c-str]
             [muse.genxml.scale_maps :as gsm]
-            [muse.genxml.notevector :as nvr]))
+            [muse.genxml.notevector :as nvr]
+            [muse.utils.utils :as utils]))
 
 
 (def key-nums ["0" "1" "2" "3" "4" "5" "6" "7"
@@ -121,22 +122,15 @@
 
 (defn convert-accidentals [s]
   (-> s
-      (c-str/replace " Flat" "&#9837")
-      (c-str/replace " Sharp" "&#9839")))
-
-(defn capitalize-scales [s]
-  "Capitalize every word in a string"
-  (->>
-   (c-str/split (str s) #"\b")
-   (map c-str/capitalize)
-   c-str/join))
+      (c-str/replace " Flat" "♭")
+      (c-str/replace " Sharp" "♯")))
 
 (def el element)
 
 (defn gen-work [scale]
   (let [cscale (convert-accidentals
                 (c-str/replace
-                 (capitalize-scales scale)
+                 (utils/capitalize-string scale)
                  "-" " "))]
     (el :work {}
         (el :work-title {} cscale))))
@@ -165,7 +159,7 @@
 
         (el :clef {}
             (el :sign {} "G")
-            (el :line {} "1")))
+            (el :line {} "2")))
 
       (if (:time-sig &m)
         (el :time {}
@@ -329,17 +323,6 @@
       ["theory"])))
 
 
-(def diatonic-list [["ionian"] ["dorian"] ["phrygian"] ["lydian"]
-                    ["mixolydian"] ["aeolian"] ["locrian"]])
-
-(defn diatonic-links [scale-vector]
-  (if (or (some #(= 2 %) (flatten scale-vector))
-          (some #(= -2 %) (flatten scale-vector)))
-      "theory"
-      (map #(str "/modes/" (%2 0) "-modes/" (%1 0) "-"(%2 0) "-mode")
-           scale-vector
-           diatonic-list)))
-
 (defn gen-measure-one [scale iname m]
   (let [scale-type (nvr/get-ntype iname)]
     (el :part {:id "P1"}
@@ -353,7 +336,7 @@
                   (gen-chord-xml scale scale-type m))))))
 
 (defn gen-sheet-music [scale iname &m]
-  (el :score-partwise {:version "3.0"}
+  (el :score-partwise {:version "3.1"}
       (gen-work iname)
       (gen-identification)
       (gen-part-list)

@@ -9,6 +9,7 @@ Vue.config.productionTip = false
 // page imports
 import HomePage from '@/components/pages/HomePage'
 import Notation from '@/components/pages/Scales'
+import Metronome from '@/components/pages/Metronome'
 
 import Rsmg from '@/components/notation/Rsmg'
 
@@ -29,6 +30,22 @@ const router =  new VueRouter({
               maininfo: HomePage
           }
         },
+        { path: '/metronome',
+          components: {
+              maininfo: Metronome
+          }
+        },
+        { path: '/lab',
+          components: {
+              maininfo: Metronome
+          }
+        },
+        { path: '/random-sheet-music-generator',
+          components: {
+              maininfo: Metronome
+          }
+        },
+        
         { path: '/lab/random-sheet-music-generator',
           components: {
               maininfo: Rsmg

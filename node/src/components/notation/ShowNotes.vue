@@ -22,7 +22,7 @@ props: [ "note-list" ],
 
 data () {
 return {
-noteArray: null,
+noteArray: [],
 noteString: null
 }
 },
@@ -36,5 +36,5 @@ this.noteString = this.noteArray.join(", ")
 </script>
 
 <style scoped>
- 
+
 </style>

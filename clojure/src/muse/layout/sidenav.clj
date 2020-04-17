@@ -70,4 +70,4 @@
              {:title "RSMG"
               :href "/random-sheet-music-generator"}
              {:title "Metronome"
-              :href "#"})})
+              :href "/metronome"})})

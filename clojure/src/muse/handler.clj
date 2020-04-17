@@ -2,9 +2,11 @@
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [compojure.handler :refer [site]]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-            [ring.util.response :as resp]
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults api-defaults]]
+            [ring.middleware.json :refer [wrap-json-body wrap-json-params]]
+            [ring.util.response :refer [response]]
             [ring.middleware.cors :as cors]
+
 
             [muse.page.page :as pg]
             [muse.genxml.genxml :as gxml]
@@ -107,12 +109,29 @@
   (GET "/sidenav" []
        (json/write-str (sidenav/side-nav)))
 
-  (GET "/:x1/:x2" [x1 x2]
-       (json/write-str (valid-x2-route? x1 x2))
-       )
+  ;; (GET "/:x1/:x2" [x1 x2 & m]
+  ;;      (prn m)
+  ;;      (json/write-str (valid-x2-route? x1 x2))
+  ;;      )
 
-  (GET "/:x1/:x2/:x3" [x1 x2 x3 & m]
-       (json/write-str (valid-x3-route? x1 x2 x3 m)))
+    ;; (GET "/:x1/:x2" request
+    ;;      (prn request)
+    ;;    (json/write-str (valid-x2-route? x1 x2))
+    ;;    )
+
+  (POST "/:x1/:x2" request
+        (let [x1 (-> request :params :x1)
+              x2 (-> request :params :x2)
+              ]
+          (json/write-str (valid-x2-route? x1 x2))))
+
+
+  (POST "/:x1/:x2/:x3" request
+       (let [x1 (-> request :params :x1)
+             x2 (-> request :params :x2)
+             x3 (-> request :params :x3)
+             m {}]
+         (json/write-str (valid-x3-route? x1 x2 x3 m))))
 
   ;; (GET "/blog" [] (blist/blog-list-page))
   ;; (context "/blog" []  blog-page)
@@ -128,7 +147,7 @@
   ;; (GET "/about" [] (abt/about))
 
   (GET "/lab/random-sheet-music-generator" [] (json/write-str {:rsmg "RSMG22"}))
-  
+
   ;; (GET "/lab/generate-sheet-music" [] (lab-gsm/lab-page))
   ;; (POST "/lab/generate-sheet-music" {m :form-params}
   ;;       (lab-gsm/lab-page m))
@@ -137,15 +156,14 @@
   ;; (POST "/lab/record-to-file" {m :form-params}
   ;;       (lab-rtf/lab-page m))
 
-  ;; (GET "/metronome" [] (mtn/metronome-page))
+  (GET "/metronome" [] (json/write-str {:coming-soon ["coming soon"]}) ;(mtn/metronome-page)
+       )
 
   (route/not-found "404" ;(fof/four-oh-four)
                    ))
 
 (def app
-  (-> (wrap-defaults app-routes site-defaults)
+  (-> (wrap-defaults app-routes api-defaults)
+      (wrap-json-params app-routes)
       (cors/wrap-cors :access-control-allow-origin [#".*"]
                       :access-control-allow-methods [:get :put :post :delete])))
-
-;; (def app
-;;   (wrap-defaults app-routes site-defaults))

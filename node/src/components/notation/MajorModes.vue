@@ -1,33 +1,36 @@
 <template>
-<div>
-  <!-- {{ modeArray }} -->
-  <p>Modes for the {{ noteArray[0] }} Major Scale</p>
-  <ul class="no-bullet">
-    <li v-for="i in modeArray" :key="i[0]">
-      <router-link v-bind:to="'/modes/' + i[0] + 's/' + i[1].toLowerCase() + '-' + i[0]">
-        {{ i[1] + " " + toTitleCase(i[0].replace("-", " ")) }} </router-link>
-    </li>
-  </ul>
-  
-  <p>Relative Minor for the {{ noteArray[0] }} Major Scale</p>
-  <router-link v-bind:to="'/minor-scales/natural-minor-scales/' + noteArray[5].toLowerCase() + '-natural-minor-scale'">
-    {{ noteArray[5] }} Natural Minor  Mode</router-link>
+<div class="grid-x">
+  <div class="cell small-6">
+    <p>Modes for the {{ noteArray[0] }} Major Scale</p>
+    <ul class="no-bullet">
+      <li v-for="i in modeArray" :key="i[0]">
+        <router-link v-bind:to="'/modes/' + i[0] + 's/' + i[1].toLowerCase() + '-' + i[0]">
+          {{ i[1] + " " + toTitleCase(i[0].replace("-", " ")) }} </router-link>
+      </li>
+    </ul>
+  </div>
 
+  <div class="cell small-6">
+
+    <p>Relative Minor for the {{ noteArray[0] }} Major Scale</p>
+    <router-link v-bind:to="'/minor-scales/natural-minor-scales/' + noteArray[5].toLowerCase() + '-natural-minor-scale'">
+      {{ noteArray[5] }} Natural Minor  Mode</router-link>
+  </div>
 </div>
 </template>
 
 
 <script>
 import { toTitleCase } from '@/components/utils/string.js'
-  
+
 export default ({
 name: "major-modes",
 props: [ "mode-list" ],
 
 data () {
 return {
-noteArray: null,
-modeArray: null
+noteArray: [],
+modeArray: []
 }
 },
 
@@ -57,7 +60,7 @@ toTitleCase
   .treble {
   height: 4em;
   }
-  
+
   .bass {
   height: 2.4em;
   padding-bottom: .1em;
