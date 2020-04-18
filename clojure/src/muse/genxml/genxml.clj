@@ -13,8 +13,9 @@
 (def clefs ["G1" "F1" "F3" "C1" "C2" "C3" "C4"])
 
 (defn decide-key-sig [m]
-  (if (not= (m "key-sig") "random")
-    (m "key-sig")
+  (prn "keysig? == " m)
+  (if (not= (m "keysig") "random")
+    (m "keysig")
     (key-nums (rand-int (count key-nums)))))
 
 ;; etc
@@ -149,8 +150,8 @@
   (el :attributes {}
       (el :divisions {} 32)
       (el :key {}
-          (if (:key-sig &m)
-            (el :fifths {} (:key-sig &m))
+          (if (:keysig &m)
+            (el :fifths {} (:keysig &m))
             (el :fifths {} 0)))
       (if (:clef  &m)
         (el :clef {}
@@ -414,7 +415,7 @@
 (defn init-rsmg [pm]
   (let [clef (decide-clef pm)
         m {:clef clef
-           :key-sig (decide-key-sig pm)
+           :keysig (decide-key-sig pm)
            :time-sig "44"
            :octave (decide-octave pm clef)
            :bars (Integer/parseInt (pm "bars"))
@@ -429,7 +430,7 @@
 (defn gen-random-sheet-music [rsmg-vec pm]
   (let [clef (decide-clef pm)
         m {:clef clef
-           :key-sig (decide-key-sig pm)
+           :keysig (decide-key-sig pm)
            :time-sig "44"
            :bars (Integer/parseInt (pm "bars"))}]
     (el :score-partwise {:version "3.0"}
@@ -447,7 +448,7 @@
                         (el :pitch {}
                             (el :step {}
                                 (j 0))
-                            (el :alter {} 
+                            (el :alter {}
                                (j 1))
                             (el :octave {}
                                 (j 2)))

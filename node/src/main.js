@@ -22,6 +22,9 @@ Vue.prototype.$foundation = Foundation
 import SideNav from '@/components/layout/SideNav'
 Vue.component('side-nav', SideNav);
 
+import AmazonAd from '@/components/layout/AmazonAd'
+Vue.component('amazon-ad', AmazonAd);
+
 const router =  new VueRouter({
     mode: 'history',
     routes: [
@@ -45,7 +48,7 @@ const router =  new VueRouter({
               maininfo: Metronome
           }
         },
-        
+
         { path: '/lab/random-sheet-music-generator',
           components: {
               maininfo: Rsmg
@@ -71,7 +74,3 @@ new Vue({
     template: '<App/>',
     components: { App }
 })
-
-
-
-

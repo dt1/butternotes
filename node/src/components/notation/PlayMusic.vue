@@ -1,12 +1,13 @@
 <template>
 <div class="grid-x">
-    <div class="cell small-2 pad-top">
-      <a href="#" @click="play" style="font-size:2em; color:black" v-html="playButton"></a>
+    <div class="cell small-4 pad-top">
+      <!-- <a href="#" @click="play" style="font-size:2em; color:black" v-html="playButton"></a> -->
+      <span @click="play" style="font-size:2em; color:black" v-html="playButton"></span>
     </div>
     <div class="cell small-2 pad-top">
       <input type="number" value="60" @change="changeBpm($event)">
     </div>
-    <div class="cell small-8">
+    <div class="cell small-6">
     </div>
 </div>
 </template>
@@ -31,16 +32,23 @@ props: [ "noteList" ],
             pause: 60000 / 60, // this.bpm,
             sustain: 6000 / 60 / 2000 // this.pause / 2000
         }
-    },
+},
 
-    methods: {
+mounted () {
+Object.assign(this.tf, false);
+console.log("tf == " + this.tf);
+// this.playscale();
+},
+
+methods: {
         play: function() {
             this.tf = toggleBool(this.tf);
             this.playButton = togglePlayButton(this.playButton);
             this.playscale();
         },
 
-        playscale: function () {
+playscale: function () {
+console.log("ps = " + this.tf);
             if(this.tf){
                 var piano = new Wad(Wad.presets.piano);
                 piano.play({pitch: this.noteList[this.currentNote],
@@ -56,7 +64,7 @@ props: [ "noteList" ],
                 }
 
                 setTimeout(this.playscale, this.pause);
-            }
+}
 },
 
 changeBpm: function (event) {

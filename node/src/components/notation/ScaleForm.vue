@@ -2,22 +2,22 @@
 <div>
   <form id="update-notes" @submit.prevent="formData">
     <legend>Clef:</legend>
-    <input type="radio" id="trebleClef" value="trebleClef" v-model="clef">
+    <input type="radio" id="trebleClef" value="G1" v-model="clef">
     <label for="trebleClef">
       <img class="treble" :src="`${publicPath}img/clefs/treble-clef.svg`" />
     </label>
 
-    <input type="radio" id="bassClef" value="bassClef" v-model="clef">
+    <input type="radio" id="bassClef" value="F4" v-model="clef">
     <label for="bassClef">
       <img class="bass" :src="`${publicPath}img/clefs/bass-clef.svg`" />
     </label>
 
-    <input type="radio" id="tenorClef" value="tenorClef" v-model="clef">
+    <input type="radio" id="tenorClef" value="C4" v-model="clef">
     <label for="tenorClef">
       <img class="tenor" :src="`${publicPath}img/clefs/tenor-clef.svg`" />
     </label>
 
-    <input type="radio" id="altoClef" value="altoClef" v-model="clef">
+    <input type="radio" id="altoClef" value="C3" v-model="clef">
     <label for="altoClef">
       <img class="alto" :src="`${publicPath}img/clefs/alto-clef.svg`" />
     </label>

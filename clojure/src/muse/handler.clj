@@ -83,11 +83,11 @@
 (defn valid-x1-route? [x1]
   (contains? vxm/valid-xn-map x1))
 
-(defn valid-x2-route? [x1 x2]
+(defn valid-x2-route? [x1 x2 m]
   (if (and (contains? vxm/valid-xn-map x1))
     (if (= x1 "major-scales")
-      (major-scale-page x2 nil)
-      (chromatic-scale-page x2 nil))))
+      (major-scale-page x2 m)
+      (chromatic-scale-page x2 m))))
 
 (defn valid-x3-route? [x1 x2 x3 m]
   (let [x2-conv (minor-converter-map x2)]
@@ -122,17 +122,23 @@
   (POST "/:x1/:x2" request
         (let [x1 (-> request :params :x1)
               x2 (-> request :params :x2)
-              ]
-          (json/write-str (valid-x2-route? x1 x2))))
+              m (select-keys (:params request) [:clef :octave :keysig])]
+          (prn "m = " m)
+          (prn request)
+          (json/write-str (valid-x2-route? x1 x2 m))
+;          (json/write-str (valid-x2-route? x1 x2 m))
+          ))
 
 
   (POST "/:x1/:x2/:x3" request
        (let [x1 (-> request :params :x1)
              x2 (-> request :params :x2)
              x3 (-> request :params :x3)
-             m {}]
+             m (select-keys (:params request) [:clef :octave :keysig])]
          (json/write-str (valid-x3-route? x1 x2 x3 m))))
 
+  (GET "/amazon-advertisement" []
+       (json/write-str (sql/amz-imgtxt-ad sql/db)))
   ;; (GET "/blog" [] (blist/blog-list-page))
   ;; (context "/blog" []  blog-page)
 

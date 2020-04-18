@@ -5,14 +5,15 @@
   </div>
 
   <div class="grid-x">
-    <play-music class="cell small-8"  v-if="sounds" :note-list="sounds" />
+    {{ sounds }}
+    <play-music class="cell small-11"  v-if="sounds" :note-list="sounds" :key="k" />
   </div>
   <div class="grid-x">
-    <osmd class="cell small-8" v-if="notation" :notation="notation" />
+    <osmd class="cell small-11" v-if="notation" :notation="notation" :key="k" />
   </div>
 
   <div class="grid-x">
-    <div class="cell small-8">
+    <div class="cell small-11">
       <ul class="accordion" data-accordion data-allow-all-closed="true">
         <li class="accordion-item" data-accordion-item>
           <a href="#" class="accordion-title" v-if="notation">Download MusicXML</a>
@@ -61,79 +62,84 @@ import ScaleForm from '@/components/notation/ScaleForm'
 export default ({
 components: {
 NoteMenu,
-        PlayMusic,
-        Osmd,
-        DlMusicXml,
-        ShowNotes,
-        MajorModes,
+PlayMusic,
+Osmd,
+DlMusicXml,
+ShowNotes,
+MajorModes,
 ScaleForm
-    },
+},
 
-    data () {
-        return {
-            notation: null,
-            sounds: null,
+data () {
+return {
+notation: null,
+sounds: null,
 modeList: null,
 returnedData: null,
 clef: null,
 octave: null,
 keysig: null,
-payload: {}
-        }
-    },
-
-    async mounted () {
-        let scale = this.$route.params.scale;
-        let stype = this.$route.params.stype;
-        let ntype = this.$route.params.ntype;
-
-        let result;
-
-        if (ntype) {
-            result = await axios
-                .post(`http://localhost:3000/${scale}/${stype}/${ntype}`);
-        } else {
-            result = await axios
-                .post(`http://localhost:3000/${scale}/${stype}`, this.payload);
-        }
-
-         this.$nextTick(); // wait for re-render
-        this.notation = result.data.xml;
-
-        if (result.data.sound) {
-            this.sounds = JSON.parse(result.data.sound.replace(/'/g, '"'));
+scale: this.$route.params.scale,
+stype: this.$route.params.stype,
+ntype: this.$route.params.ntype,
+result: null,
+payload: new Object(),
+k: 0
 }
+},
 
-
-        if (scale == "major-scales") {
-            this.modeList = this.sounds;
-}
-
+async mounted () {
+this.getData();
 }
 ,
 
-    updated() {
-        this.$nextTick(function () {
-            this.menu = new this.$foundation.Accordion($('.accordion'))
-        })
+updated() {
+this.$nextTick(function () {
+this.menu = new this.$foundation.Accordion($('.accordion'))
+})
 },
 
 methods: {
-updateNotes: function (value) {
-this.returnedData = value;
+updateNotes (value) {
 
-this.clef = value.get("clef");
-this.octave = value.get("octave");
-this.keysig = value.get("keySig");
+this.payload.clef = value.get("clef");
+this.payload.octave = value.get("octave").toString();
+this.payload.keysig = value.get("keySig").toString();
 
-console.log(this.clef)
-console.log(this.octave)
-console.log(this.keysig)
+this.getData();
+}
+,
+
+
+forceRerender() {
+      this.k += 1;
+}
+,
+
+async getData () {
+if (this.ntype) {
+this.result =  await axios
+    .post(`http://localhost:3000/${this.scale}/${this.stype}/${this.ntype}`, this.payload);
+} else {
+this.result = await axios
+    .post(`http://localhost:3000/${this.scale}/${this.stype}`, this.payload);
+}
+
+
+this.$nextTick(); // wait for re-render
+this.notation = this.result.data.xml;
+
+if (this.result.data.sound) {
+this.sounds = JSON.parse(this.result.data.sound.replace(/'/g, '"'));
+}
+
+this.forceRerender();
+}
+
+
+
 
 }
-}
-
-
 })
 
 
