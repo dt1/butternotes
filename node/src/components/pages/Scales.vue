@@ -5,7 +5,7 @@
   </div>
 
   <div class="grid-x">
-    <play-music class="cell small-11"  v-if="sounds" :note-list="sounds" />
+    <play-music class="cell small-11"  v-if="sounds" :note-list="sounds" :key="k" />
   </div>
   <div class="grid-x">
     <osmd class="cell small-11" v-if="notation" :notation="notation" :key="k" />
