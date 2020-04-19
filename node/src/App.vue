@@ -20,6 +20,17 @@
       <router-view name="maininfo" :key="$route.fullPath"></router-view>
     </div>
     <amazon-ad class="cell small-2" :key="$route.fullPath"/>
+    <!-- vert -->
+    <Adsense
+    data-ad-client="ca-pub-9497253845069586"
+    data-ad-slot="5658224748">
+    </Adsense>
+
+    <!-- square -->
+    <Adsense
+    data-ad-client="ca-pub-9497253845069586"
+    data-ad-slot="5439620945">
+    </Adsense>
   </div>
 
 </div>

@@ -1,8 +1,8 @@
 <template>
 <div class="grid-x">
     <div class="cell small-4 pad-top">
-      <!-- <a href="#" @click="play" style="font-size:2em; color:black" v-html="playButton"></a> -->
-      <span @click="play" style="font-size:2em; color:black" v-html="playButton"></span>
+      <a href="#" @click="play" style="font-size:2em; color:black" v-html="playButton"></a>
+      <!-- <span @click="play" style="font-size:2em; color:black" v-html="playButton"></span> -->
     </div>
     <div class="cell small-2 pad-top">
       <input type="number" value="60" @change="changeBpm($event)">

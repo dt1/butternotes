@@ -25,6 +25,11 @@ Vue.component('side-nav', SideNav);
 import AmazonAd from '@/components/layout/AmazonAd'
 Vue.component('amazon-ad', AmazonAd);
 
+// adsense
+import Ads from 'vue-google-adsense'
+Vue.use(require('vue-script2'))
+Vue.use(Ads.Adsense)
+
 const router =  new VueRouter({
     mode: 'history',
     routes: [
