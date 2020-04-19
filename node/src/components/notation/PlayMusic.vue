@@ -18,61 +18,62 @@ import { toggleBool } from '@/components/notation/utils/toggle-bool.js'
 import { togglePlayButton } from '@/components/notation/utils/toggle-play-button.js'
 
 export default ({
-    name: "play-music",
+name: "play-music",
 
 props: [ "noteList" ],
 
-    data () {
-        return {
-            sounds: null,
-            playButton: "&#9656; (play)",
-            tf: false,
-            currentNote: 0,
-            bpm: 60,
-            pause: 60000 / 60, // this.bpm,
-            sustain: 6000 / 60 / 2000 // this.pause / 2000
-        }
+data () {
+return {
+sounds: null,
+playButton: "&#9656; (play)",
+tf: false,
+currentNote: 0,
+bpm: 60,
+pause: 60000 / 60, // this.bpm,
+sustain: 6000 / 60 / 2000 // this.pause / 2000
+}
 },
 
-mounted () {
-Object.assign(this.tf, false);
-console.log("tf == " + this.tf);
-// this.playscale();
-},
+beforeDestroy() {
+    this.tf = false;
+  },
 
 methods: {
-        play: function() {
-            this.tf = toggleBool(this.tf);
-            this.playButton = togglePlayButton(this.playButton);
-            this.playscale();
-        },
+play: function() {
+this.tf = toggleBool(this.tf);
+this.playButton = togglePlayButton(this.playButton);
+this.playscale();
+},
 
 playscale: function () {
 console.log("ps = " + this.tf);
-            if(this.tf){
-                var piano = new Wad(Wad.presets.piano);
-                piano.play({pitch: this.noteList[this.currentNote],
-                            env: {hold: this.sustain}});
+if(this.tf){
+var piano = new Wad(Wad.presets.piano);
+piano.play({pitch: this.noteList[this.currentNote],
+env: {hold: this.sustain}});
 
-                this.currentNote++;
-                this.currentNote%=this.noteList.length;
-                if(this.currentNote == 0){
-                    this.pause = 4000;
-                }
-                else {
-                    this.pause = 60000 / this.bpm;
-                }
+this.currentNote++;
+this.currentNote%=this.noteList.length;
+if(this.currentNote == 0){
+this.pause = 4000;
+}
+else {
+this.pause = 60000 / this.bpm;
+}
 
-                setTimeout(this.playscale, this.pause);
+setTimeout(this.playscale, this.pause);
 }
 },
 
 changeBpm: function (event) {
-      this.bpm = event.target.value
-      this.pause = 60000 / this.bpm;
-      this.sustain = this.pause / 2000;
-}
+this.bpm = event.target.value
+this.pause = 60000 / this.bpm;
+this.sustain = this.pause / 2000;
+},
 
+forceRerender() {
+this.k += 1;
+}
 }
 })
 

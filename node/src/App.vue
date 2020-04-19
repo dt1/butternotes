@@ -23,7 +23,8 @@
     <!-- vert -->
     <Adsense
     data-ad-client="ca-pub-9497253845069586"
-    data-ad-slot="5658224748">
+      data-ad-slot="5658224748"
+      data-ad-test="on">
     </Adsense>
 
     <!-- square -->
