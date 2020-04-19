@@ -5,7 +5,7 @@
     <div class="grid-x grid-margin-x">
       <div class="cell small-12">
         <h1 style="font-size: 1em;">
-          <router-link to="/" class="black">unknown</router-link>
+          <router-link to="/" class="black">Butter Notes</router-link>
           <br>
           <small class="black">Explore &amp; Practice Music.</small>
         </h1>

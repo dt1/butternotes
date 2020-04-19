@@ -1,6 +1,6 @@
 <template>
 <div>
-  <p>metronome coming soon
+  <p>coming soon
   </p>
 
 </div>

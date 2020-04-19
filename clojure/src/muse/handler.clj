@@ -29,6 +29,7 @@
 
             [muse.valid_xn_map :as vxm]
 
+            [muse.db.dbfns :as sql-fn]
             [muse.db.conn :as sql]
 
             [muse.gdefs.gdefs :as gdefs])
@@ -138,7 +139,7 @@
          (json/write-str (valid-x3-route? x1 x2 x3 m))))
 
   (GET "/amazon-advertisement" []
-       (json/write-str (sql/amz-imgtxt-ad sql/db)))
+       (json/write-str (sql-fn/amz-imgtxt-ad sql/db)))
   ;; (GET "/blog" [] (blist/blog-list-page))
   ;; (context "/blog" []  blog-page)
 

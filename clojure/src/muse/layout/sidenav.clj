@@ -8,8 +8,8 @@
      (for [xx x]
          {:href (str "/" scl "/" xx
                      "/c-" (apply str (butlast xx)))
-          :name          
-          (as-> 
+          :name
+          (as->
               (c-str/replace xx #"scales" "") s
               (c-str/replace s #"modes" "")
               (c-str/replace s #"chords" "")
@@ -54,6 +54,26 @@
            :href "#"
            :sub2 (submenu-links "diminished-chords")}))
 
+(defn lab-nav []
+  (vector {:name "RSMG"
+           :href "/lab/random-sheet-music-generator"}
+          {:name "Metronome"
+           :href "/lab/metronome"}))
+
+(defn review-nav []
+  (vector {:name "Hardware"
+           :href "/reviews/hardware"}
+          {:name "Plugins"
+           :href "/reviews/hardware"}
+          {:name "Gear"
+           :href "/reviews/hardware"}
+          {:name "Instruments"
+          :href "/reviews/hardware"}))
+
+(defn programming-nav []
+  (vector {:name "Programming"
+          :href "/on-programming/cof-one"}))
+
 (defn side-nav []
   {:sidenav (vector
              {:title "Scales"
@@ -66,8 +86,11 @@
               :href "#"
               :sub1 (chords-nav)}
              {:title "Lab"
-              :href "/lab"}
-             {:title "RSMG"
-              :href "/random-sheet-music-generator"}
-             {:title "Metronome"
-              :href "/metronome"})})
+              :href "#"
+              :sub1 (lab-nav)}
+             {:title "Reviews"
+              :href "#"
+              :sub1 (review-nav)}
+             {:title "On Programming"
+              :href "#"
+              :sub1 (programming-nav)})})
