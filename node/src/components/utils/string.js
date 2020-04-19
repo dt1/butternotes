@@ -6,4 +6,9 @@ function toTitleCase(str) {
 	return str.join(' ');
 }
 
-export { toTitleCase }
+function rtToTitleCase(str) {
+    str = str.split('-').join(' ');
+    return toTitleCase(str);
+}
+
+export { toTitleCase, rtToTitleCase }
