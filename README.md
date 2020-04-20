@@ -1,6 +1,25 @@
-This project is a work in progress. If you attempt to clone and run this, odds are it won't work, but if you wish to try,
-use the standard install for npm, clojure, and be sure to update the database connection file.
+# How to run:
 
-This link is only clojure at this time: http://muse-env.eba-gb2hjxvj.us-west-2.elasticbeanstalk.com/
+This system requires Clojure, Vue.js (NodeJs), and PostgresSQL.
 
-It will be updated with the full version later.
+### PostgreSQL
+
+Create a new database and run the files found under /db-scripts.
+
+`mv clojure/src/muse/db/conn_orig.clj clojure/src/muse/db/conn.clj`
+
+Update the file with the appropriate credentials.
+
+### Clojure
+
+`$ cd clojure`
+
+`$ lein ring server`
+
+### Node / VueJs
+
+` $ cd node`
+
+`$ npm run serve`
+
+The site will be available and `localhost:8080`
