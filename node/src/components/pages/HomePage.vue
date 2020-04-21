@@ -22,7 +22,7 @@ export default ({
   },
   mounted () {
     axios
-    .get('http://localhost:3000/homepage')
+    .get('http://127.0.0.1:3000/homepage')
     .then(result => (this.info = result))
 },
 methods: {

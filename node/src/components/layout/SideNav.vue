@@ -38,7 +38,7 @@ export default ({
 
     mounted () {
         axios
-            .get('http://localhost:3000/sidenav')
+            .get('http://127.0.0.1:3000/sidenav')
             .then(result => (this.nav = result.data.sidenav));
     },
 
@@ -56,7 +56,5 @@ export default ({
 </script>
 
 <style scoped>
-  
-</style>
 
-  
+</style>

@@ -118,10 +118,10 @@ forceRerender() {
 async getData () {
 if (this.ntype) {
 this.result =  await axios
-    .post(`http://localhost:3000/${this.scale}/${this.stype}/${this.ntype}`, this.payload);
+    .post(`http://127.0.0.1:3000/${this.scale}/${this.stype}/${this.ntype}`, this.payload);
 } else {
 this.result = await axios
-    .post(`http://localhost:3000/${this.scale}/${this.stype}`, this.payload);
+    .post(`http://127.0.0.1:3000/${this.scale}/${this.stype}`, this.payload);
 }
 
 

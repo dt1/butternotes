@@ -15,7 +15,7 @@ export default ({
   },
   mounted () {
     axios
-    .get('http://localhost:3000/lab/random-sheet-music-generator')
+    .get('http://127.0.0.1:3000/lab/random-sheet-music-generator')
     .then(result => (this.info = result))
 },
 methods: {

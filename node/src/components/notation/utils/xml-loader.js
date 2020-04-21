@@ -7,7 +7,7 @@ function handleFileSelect(xml) {
                                                                                  drawUpToMeasureNumber: Number.MAX_SAFE_INTEGER,
                                                                                  drawPartNames: false
                                                                                 },
-                                                                                
+
                                                                                );
 
 

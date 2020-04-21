@@ -4,7 +4,7 @@
 
 <script>
   import { handleFileSelect } from '@/components/notation/utils/xml-loader.js'
-  
+
   export default ({
   name: "osmd",
 props: [ "notation" ],

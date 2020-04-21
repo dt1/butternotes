@@ -20,7 +20,8 @@
 
   :plugins [
             [lein-ring "0.12.5"]
-            [lein-environ "1.1.0"]]
+;            [lein-environ "1.1.0"]
+            ]
   ;; :hooks [environ.leiningen.hooks]
   :ring {:handler muse.handler/app}
   ;; :uberjar-name "muse.jar"

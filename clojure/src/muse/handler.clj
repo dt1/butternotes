@@ -140,6 +140,7 @@
 
   (GET "/amazon-advertisement" []
        (json/write-str (sql-fn/amz-imgtxt-ad sql/db)))
+
   ;; (GET "/blog" [] (blist/blog-list-page))
   ;; (context "/blog" []  blog-page)
 
