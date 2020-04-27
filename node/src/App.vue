@@ -14,18 +14,17 @@
   </div>
 
   <div class="grid-x">
-    <side-nav class="cell large-3"/>
-    <div class="cell large-7">
-      <router-view name="notemenu" :key="$route.fullPath"></router-view>
-      <router-view name="maininfo" :key="$route.fullPath"></router-view>
-    </div>
-    <amazon-ad class="cell large-2" :key="$route.fullPath"/>
+    <side-nav class="cell small-2" />
+    <router-view class="cell small-7" name="maininfo" :key="$route.fullPath" />
+    <div class="cell small-3">
+      <amazon-ad class="cell small-offset-3" :key="$route.fullPath" />
     <!-- vert -->
-    <Adsense
-    data-ad-client="ca-pub-9497253845069586"
-      data-ad-slot="6406886553"
-      data-ad-test="on">
-    </Adsense>
+      <Adsense
+        data-ad-client="ca-pub-9497253845069586"
+        data-ad-slot="6406886553"
+        data-ad-test="on">
+      </Adsense>
+    </div>
 
     <!-- square -->
     <!-- <Adsense -->

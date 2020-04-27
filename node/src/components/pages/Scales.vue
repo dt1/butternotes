@@ -1,45 +1,37 @@
 <template>
 <div>
-  <div class="grid-x">
-    <note-menu class="cell small-12" />
-  </div>
+  <note-menu />
 
-  <div class="grid-x">
-    <play-music class="cell small-11"  v-if="sounds" :note-list="sounds" :key="k" />
-  </div>
-  <div class="grid-x">
-    <osmd class="cell small-11" v-if="notation" :notation="notation" :key="k" />
-  </div>
+  <play-music v-if="sounds" :note-list="sounds" :key="k" />
+  <osmd v-if="notation" :notation="notation" :key="k" />
 
-  <div class="grid-x">
-    <div class="cell small-11">
-      <ul class="accordion" data-accordion data-allow-all-closed="true">
-        <li class="accordion-item" data-accordion-item>
-          <a href="#" class="accordion-title" v-if="notation">Download MusicXML</a>
-          <div class="accordion-content" data-tab-content>
-            <dl-music-xml v-if="notation" :xml="notation" />
-          </div>
-        </li>
-        <li class="accordion-item" data-accordion-item>
-          <a href="#" class="accordion-title"  v-if="notation">Show Notes</a>
-          <div class="accordion-content" data-tab-content>
-            <show-notes v-if="sounds" :note-list="sounds" />
-          </div>
-        </li>
-        <li class="accordion-item" v-if="modeList" data-accordion-item>
-          <a href="#" class="accordion-title" v-if="notation">Show Modes and Relative Minor</a>
-          <div class="accordion-content" data-tab-content>
-            <major-modes :mode-list="modeList" />
-          </div>
-        </li>
-        <li class="accordion-item" v-if="notation" data-accordion-item>
-          <a href="#" class="accordion-title">Show Scale Form</a>
-          <div class="accordion-content" data-tab-content>
-            <scale-form @update-scale="updateNotes" />
-          </div>
-        </li>
-      </ul>
-    </div>
+  <div>
+    <ul class="accordion" data-accordion data-allow-all-closed="true">
+      <li class="accordion-item" data-accordion-item>
+        <a href="#" class="accordion-title" v-if="notation">Download MusicXML</a>
+        <div class="accordion-content" data-tab-content>
+          <dl-music-xml v-if="notation" :xml="notation" />
+        </div>
+      </li>
+      <li class="accordion-item" data-accordion-item>
+        <a href="#" class="accordion-title"  v-if="notation">Show Notes</a>
+        <div class="accordion-content" data-tab-content>
+          <show-notes v-if="sounds" :note-list="sounds" />
+        </div>
+      </li>
+      <li class="accordion-item" v-if="modeList" data-accordion-item>
+        <a href="#" class="accordion-title" v-if="notation">Show Modes and Relative Minor</a>
+        <div class="accordion-content" data-tab-content>
+          <major-modes :mode-list="modeList" />
+        </div>
+      </li>
+      <li class="accordion-item" v-if="notation" data-accordion-item>
+        <a href="#" class="accordion-title">Show Scale Form</a>
+        <div class="accordion-content" data-tab-content>
+          <scale-form @update-scale="updateNotes" />
+        </div>
+      </li>
+    </ul>
   </div>
 
 </div>

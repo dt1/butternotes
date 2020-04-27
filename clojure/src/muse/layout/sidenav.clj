@@ -1,7 +1,12 @@
 (ns muse.layout.sidenav
   (:require [muse.valid_xn_map :as vxm]
             [muse.utils.utils :as utils]
-            [clojure.string :as c-str]))
+            [clojure.string :as c-str]
+            [muse.db.dbfns :as sql-fn]
+            [muse.db.conn :as sql] ))
+
+(defn on-programming-links []
+  (sql-fn/on-programming-menu sql/db))
 
 (defn submenu-links [scl]
   (let [x (vxm/valid-xn-map scl)]
@@ -70,10 +75,6 @@
           {:name "Instruments"
           :href "/reviews/hardware"}))
 
-(defn programming-nav []
-  (vector {:name "Programming"
-          :href "/on-programming/cof-one"}))
-
 (defn side-nav []
   {:sidenav (vector
              {:title "Scales"
@@ -93,4 +94,4 @@
               :sub1 (review-nav)}
              {:title "On Programming"
               :href "#"
-              :sub1 (programming-nav)})})
+              :sub1 (on-programming-links)})})

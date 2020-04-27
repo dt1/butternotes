@@ -101,9 +101,6 @@
         (minor-scale-page x2-conv x3 m)))))
 
 (defroutes app-routes
-  (GET "/" []
-       (json/write-str (hmp/home-page)))
-
   (GET "/homepage" []
        (json/write-str (hmp/home-page)))
 
@@ -124,8 +121,6 @@
         (let [x1 (-> request :params :x1)
               x2 (-> request :params :x2)
               m (select-keys (:params request) [:clef :octave :keysig])]
-          (prn "m = " m)
-          (prn request)
           (json/write-str (valid-x2-route? x1 x2 m))
 ;          (json/write-str (valid-x2-route? x1 x2 m))
           ))
@@ -137,6 +132,10 @@
              x3 (-> request :params :x3)
              m (select-keys (:params request) [:clef :octave :keysig])]
          (json/write-str (valid-x3-route? x1 x2 x3 m))))
+
+  (GET "/on-programming/:x1" request
+        (let [x1 (-> request :params :x1)]
+          (json/write-str (sql-fn/on-programming-article sql/db {:url x1}))))
 
   (GET "/amazon-advertisement" []
        (json/write-str (sql-fn/amz-imgtxt-ad sql/db)))
@@ -174,4 +173,11 @@
   (-> (wrap-defaults app-routes api-defaults)
       (wrap-json-params app-routes)
       (cors/wrap-cors :access-control-allow-origin [#".*"]
+                      :access-control-allow-headers ["accept"
+                                                     "accept-encoding"
+                                                     "accept-language"
+                                                     "authorization"
+                                                     "content-type"
+                                                     "origin"
+                                                     "x-requested-with"]
                       :access-control-allow-methods [:get :put :post :delete])))

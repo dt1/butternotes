@@ -11,6 +11,7 @@ import HomePage from '@/components/pages/HomePage'
 import Notation from '@/components/pages/Scales'
 import Metronome from '@/components/pages/Metronome'
 import ComingSoon from '@/components/pages/ComingSoon'
+import Articles from '@/components/pages/Articles'
 
 import Rsmg from '@/components/notation/Rsmg'
 
@@ -44,12 +45,6 @@ const router =  new VueRouter({
               maininfo: ComingSoon
           }
         },
-        { path: '/on-programming/:item',
-          components: {
-              maininfo: ComingSoon
-          }
-        },
-
         { path: '/lab',
           components: {
               maininfo: Metronome
@@ -63,6 +58,11 @@ const router =  new VueRouter({
         { path: '/lab/random-sheet-music-generator',
           components: {
               maininfo: Rsmg
+          }
+        },
+        { path: '/on-programming/:article',
+          components: {
+              maininfo: Articles
           }
         },
         { path: '/:scale/:stype/',
