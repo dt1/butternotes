@@ -1,10 +1,11 @@
 <template>
-<div v-html="info.data.html">
-</div>
+<div v-html="this.info.data.html"></div>
 </template>
 
 <script>
-  import axios from 'axios'
+import axios from 'axios'
+// import hljs from 'highlight.js';
+import 'highlight.js/styles/ascetic.css';
 
   export default ({
   data () {
@@ -14,12 +15,18 @@
   }
   },
 
-  mounted () {
+mounted () {
     axios
     .get(`http://127.0.0.1:3000/on-programming/${this.article}`)
-    .then(result => (this.info = result))
-},
+    .then(result => (this.info = result));
+
+// hljs.initHighlightingOnLoad();
+}
+
+
+
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>
