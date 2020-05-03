@@ -1,0 +1,249 @@
+<html>
+
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css">
+
+    <!-- <link rel="stylesheet" -->
+    <!--       href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.1/build/styles/default.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/ascetic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+
+
+
+  </head>
+
+  <body>
+
+    <div class="large-9 columns">
+      <h5>Music Theory for (Non)Musicians and (Non)Programmers</h5>
+      <h3>The Circle of Fifths, Part Two</h3>
+      <p> In this article, we are going to derive the minor scales and keys of the Circle of Fifths. To do so, we are going to take a few short-cuts so that this doesn't become a copy/paste article and we can start to explore the relationships between the major and minor scales. I am assuming you read Circle of Fifths, Part One. If you have not read it, please do so, lest you become lost.</p>
+      <p class="notes">
+        <b>Q: Why start with the Circle of Fifths?</b>
+      </p>
+      <p class="notes">This is a very good question. I gave a blow-off answer to it when asked, but there was a lot of agreement that certain people never heard of the Circle of Fifths, thus they didn't see any reason to invest in learning this. I put a lot of thought into this question before starting this series.</p>
+      <p>The target audience for this series of articles is very wide:</p>
+      <ol>
+        <li>Musicians who have struggled with learning music theory but got stuck.</li>
+        <li>Musicians who may be interested in learning music theory but need a bit of convincing.</li>
+        <li>Programmers who would be interested in music theory.</li>
+        <li>Programmers who do play music and would like to explore the algorithmic nature of music.</li>
+        <li>People are intellectually inclined to understand the music they listen to in their own lives.</li>
+      </ol>
+      <p>I have to assume that a certain quantity of the audience does know how to read music (no matter how trivially) and that rest have zero clue. This thought made me consider starting up with the common staff notation but the main thrust of this series is to encode and program all of music theory. This is a fairly lofty goal, to be certain, but it does expose where I should start. The people who passively listen to music may not want to dive into reading music, but may want to dive into the intellectual underpinnings of music. The musicians who are struggling with music theory are aware of the Circle of Fifths, but probably don't know, or at least don't fully understand, why it is important. The programmers would probably not appreciate it if I started to code common notation only to backtrack and start over again. All of these factors convinced me to start at the Circle of Fifths.</p>
+      <p>Let me demonstrate with an example. We'll dive much further into these concepts in later articles, so I'm going to gloss over the basic idea here.</p>
+      <p class="notes">
+        <b>The Three Chords of Rock 'n Roll: </b>The talk of the so-called “Three Chords of Rock” is as cliche as Rock 'n Roll itself, and there is much to be said about this rumor, as it is grounded in truth. However, “The 3 Chords” suggests that there are 3 definite chords – or more precisely, that there is some common 3 chord progression that is ubiquitous throughout some 90% of Rock 'n Roll, and this isn't quite the truth. There are many versions of “The 3 Chords” mythos, but I'll pick one example and let those that are interested do their own research. Those that wish to debate the point can have that debate somewhere else: I simply ask that you bare with me because other versions of The 3 Chords don't illustrate the point as well.</p>
+      <p>I'm going to pick three chords: C, D, G.</p>
+      <p class="notes">
+        <b>Note: </b>I should technically write G Major, C Major, D Major, but colloquially musicians say only the letter of the chord when they mean Major and say the letter + Minor, i.e., “A Minor,” when they are talking a minor chord. Sheet music also follows this convention. For example, there is a popular piece of music titled “Canon in D,” not “Canon in D Major” (see the resources if you aren't sure what this is). While I will be sure to specify Major when things are likely to get confusing, in general, I will use the convention of not using up internet memory writing out Major. It is also convention to write “A Minor” as Am. For right now, I'll spell out “Minor,” but don't be surprised when you see Am, Gm, etc in other writings.</p>
+      <p>In order to make a Major Chord, we want to combine the root note, the third note, and the fifth note. So let's do that with C Major to start. In order to create C Major, we need some way to count the third and the fifth note. We would find the 3rd and 5th note by looking at the C Scale: C D E F G A B</p>
+      <p>The C note is the root of the C chord. In order to count to the third note, we count C as 1. This is different than normal counting where we'd start counting from C and count D as 1. In music counting, we count D as 2. We want to count the 3rd and the 5th note, which is E and G respectively, thus the C Major Chord is C, E, G.</p>
+      <p>Now let's count the G Major Chord. We start at G and we see that the 3rd is B and the 5th is D resulting in G Major = G B D</p>
+      <p>Now let's count the D Major Chord. We start at D and we see that the 3rd is F and the 5th is A resulting in D Major = D F A.</p>
+      <p>Got it? Good, because the above is wrong. Way wrong. The D Major Chord is actually D F# A, and as you'll see in a second, this isn't the only mistake I made.</p>
+      <p>The problem was not the pattern because that is correct. I went wrong because I didn't consider what the Circle of Fifths said to do. The Circle of Fifth does more than just tell us the fifths of the notes. It tells us something much more significant: </p>
+      <p class="notes">The Circle of Fifths tells us the proper keys to use to create chords. In order to create a correct Major Chord (and many other chords we'll examine later), the root note and all of the notes must be in the same key, or scale, as the root note. Once we get into other chords, we'll see this concept start to fall apart, but for now, we're only considering the easy stuff.</p>
+      <p>Let's refer back to the output of the D Major Scale from the Circle: D E F# A B C#. Anytime we wish to create a major chord, we have to choose the proper key from the Circle and then count the root, 3rd and 5th. In this case, we get D F# A, and that is the answer we wanted.</p>
+      <p>Let's make sure we didn't make an error with G Major: The G Major Scale from the Circle produces G A B C D E F# and we end up, purely by accident, with the correct G chord: G B D. This is one of those interesting situations where we did the wrong thing and got the correct answer. In music theory, the processes are just as important as the answer. Building chords incorrectly is a common mistake among musicians.</p>
+      <p>Suppose we identify a song on the radio that is playing the chords C D G. Now we can ask “What key is this 3 Chord Wonder in?” Well, it can't be in the Key of D because the D scale has a C# in it and that contradicts the existence of C Major. G does have a C natural, which accommodates C and an F# which accommodates D, thus this piece of music is in the key of G (Major).</p>
+      <p class="notes">
+        <b>Note: </b>Technically, the song would probably be written in I V VI form, so it is G, D, C.</p>
+      <p>The programmers – as well as musicians getting their first exposure to this – are hopefully able to see why I started here at the Circle of Fifths: I would like to have some system in place where I can create some object called D Major and the program knows that it is in fact going to be D F# A. The Circle of Fifths offers programmers and musicians a simple base to create algorithms or patterns that can be generalized and used in many facets, whether it is to create song, reverse-engineer a song, create a chord from scratch, or create a program that simply tells us what notes are in a D Major Chord.</p>
+      <h3>Deriving the Minor Scales of the Circle of Fifths</h3>
+      <p>Now I'm going to show a gap in my knowledge: I don't know exactly why the Minor Scales of the Circle start at A (some may consider 440A, but that seems a tad narrow to me), but I'll posit a reasoning: A few paragraphs up, we were counting by 3. What would happen if we started at the root of the scale and counted three notes like this until there is nothing left?</p>
+      <p>Start with C: C E G B D F A. Huh? The last note of this exercise is, in fact, A. Am I seeing patterns here that don't exist? Regardless, the minor scales of the Circle do start at A so we'll continue on...</p>
+      <p class="notes">
+        <b>Quick note about minor scales: </b>In later articles, we'll see that minor scales are a more slippery concept than major scales. For this reason, I have to be careful to clarify an important point: The Circle of Fifths does not show you the minor scales correctly. It shows the <b>relative minors</b> to the major keys. If you play an instrument, practicing the minor scales up and down as described here will produce the incorrect results.</p>
+      <p>I imagine some of you have manually derived the minor keys of the Circle after reading the last article, but I want to quickly document the difference before continuing on.</p>
+      <p>The minor keys of the Circle start at A Minor. In the last article, I showed that the pattern for C is S S H S S S H. Let's look at the handy piano to see what the pattern for A Minor is.</p>
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-02/pianoWithFlats.png">
+      <p>Similar to C, we only want to find the white keys:</p>
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-02/minorKeyPattern.png">
+      <p>The pattern is S H S S H S S, so if we were to do what was described in the last article, we'd start here:</p>
+      <pre>
+             A  A#  B  C  C#  D  D#  E  F  F#  G  G# ... Sharps
+        A:   A      B  C      D      E  F      G         0
+        A#:
+        B:
+        C:
+        ...
+        G:
+        </pre>
+      <p>This seems like a decent place to make some code. If you are not a programmer or you think my code is offensive: <a href="#result">Skip The Scary Code</a></p>
+      <p>Others shared some pretty cool implementations. I'm terrribly ill today and I can only hope it doesn't show too much. I'll call that my excuse for showing the world this stuff.</p>
+      <p>I start up by defining the Sharps, Flats, and Steps. I think you'll see my functional programming slant come out a bit in a lot of this: </p>
+      <pre class="notes"><code class="python">
+SHARP_NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+FLAT_NOTES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
+MAJOR_STEPS = [2, 2, 1, 2, 2, 2, 1]
+MINOR_STEPS = [2, 1, 2, 2, 1, 2, 2]
+      </code></pre>
+      <p>I also used the letterShift() function from last time and placed a major() and minor() code piece in that, for now, simply calls the MAJOR_STEPS and MINOR_STEPS respectively:</p>
+      <pre class="notes"><code class="python">
+def letterShift(notes, letter):
+    pos = notes.index(letter)
+    return notes[pos:] + notes[:pos]
+
+def major():
+    return MAJOR_STEPS
+
+def minor():
+    return MINOR_STEPS
+      </code></pre>
+      <p>This next block of code has a litmus() function which checks to see if the scales are valid, ie. They are A B C D E F G. What it does it strips out the #'s and adds them to a string. It then converts the string and the notes list into sets, which are like lists except that they cannot have repeating values. If, for example, the notes list is G G B C D E F, the testing set will become G B C D E F, which will be a different length than the notes list, thus the list is not valid.</p>
+      <p>The rest should be self-explanatory, though it is more 'Pythonic' I guess. I was thinking about making the makeScale() function recursive, but I didn't feel like doing it.</p>
+      <pre class="notes"><code class="python">
+def letterShift(notes, letter):
+    pos = notes.index(letter)
+    return notes[pos:] + notes[:pos]
+
+def major():
+    return MAJOR_STEPS
+
+def minor():
+    return MINOR_STEPS
+
+def litmus(notes):
+    newStr = ''
+    for i in notes:
+        newStr += i.replace('#', '')
+    return len(set(notes)) == len(set(newStr))
+
+def createList(seedList, key):
+    indice = 0
+    returnList = []
+    for i in key:
+        returnList.append(seedList[indice])
+        indice += i
+    return returnList
+
+def toFlat(seedList):
+    returnList = ['Ab' if note=='G#' else note for note in seedList]
+    returnList = ['Bb' if note=='A#' else note for note in returnList]
+    returnList = ['Cb' if note=='B#' else note for note in returnList]
+    returnList = ['Db' if note=='C#' else note for note in returnList]
+    returnList = ['Eb' if note=='D#' else note for note in returnList]
+    returnList = ['Gb' if note=='F#' else note for note in returnList]
+    return returnList
+
+
+def toFlatOrSharp(seedList):
+    returnList = ['E#' if note=='F' else note for note in seedList]
+    returnList = ['B#' if note=='C' else note for note in returnList]
+    return returnList
+
+def makeScale(letter, key):
+    if letter not in SHARP_NOTES and letter not in FLAT_NOTES:
+        return 'Sorry, {0} does not have a key.'.format(letter)
+    if 'b' not in letter:
+        returnList = createList(letterShift(SHARP_NOTES, letter), key)
+    else:
+        returnList = createList(letterShift(FLAT_NOTES, letter), key)
+    if litmus(returnList) == False:
+        returnList = toFlatOrSharp(returnList)
+    if litmus(returnList) == True:
+        return returnList
+    if key == major():
+        return toFlat(createList(letterShift(SHARP_NOTES, letter), key))
+    if key == minor():
+        return toFlat(createList(letterShift(SHARP_NOTES, letter), key))
+
+
+      </code></pre>
+      <p>As I already described, I wanted to create this so you can put into the interpretor makeScale('D', minor()) to get the correct output. I think the above accomplishes the goal.</p>
+      <p>To run it:</p>
+      <pre class="notes"><code class="python">
+for i in SHARP_NOTES:
+    print("{0}:\t{1}".format(i, ", ".join(makeScale(i, minor()))))
+
+        ##Or
+for i in SHARP_NOTES:
+    print("{0}:\t{1}".format(i, ", ".join(makeScale(i, major()))))
+
+        #Or
+makeScale('F', minor())
+
+      </code></pre>
+      <p>I'm pretty sure there are no bugs.</p>
+      <h3>
+        <a id="result">
+        </a>We eventually get this:</h3>
+      <pre class="notes">
+        A 	 A, B, C, D, E, F, G
+        A# 	 A#, B#, C#, D#, E#, F#, G#
+        B 	 B, C#, D, E, F#, G, A
+        C 	 B#, D, D#, E#, G, G#, A#
+        C# 	 C#, D#, E, F#, G#, A, B
+        D 	 D, E, E#, G, A, A#, B#
+        D# 	 D#, E#, F#, G#, A#, B, C#
+        E 	 E, F#, G, A, B, C, D
+        F 	 E#, G, G#, A#, B#, C#, D#
+        F# 	 F#, G#, A, B, C#, D, E
+        G 	 G, A, A#, B#, D, D#, E#
+        G# 	 G#, A#, B, C#, D#, E, F#</pre>
+      <p>We then follow the sames steps described in Part One and convert the sharps to flats as needed:</p>
+      <pre class="notes">
+        A 	 A, B, C, D, E, F, G
+        A# 	 A#, B#, C#, D#, E#, F#, G#
+        B 	 B, C#, D, E, F#, G, A
+        C 	 C, D, Eb, F, G, Ab, Bb
+        C# 	 C#, D#, E, F#, G#, A, B
+        D 	 D, E, F, G, A, Bb, C
+        D# 	 D#, E#, F#, G#, A#, B, C#
+        E 	 E, F#, G, A, B, C, D
+        F 	 F, G, Ab, Bb, C, Db, Eb
+        F# 	 F#, G#, A, B, C#, D, E
+        G 	 G, A, Bb, C, D, Eb, F
+        G# 	 G#, A#, B, C#, D#, E, F#</pre>
+      <p>If we compare the Minor Keys to the Major Keys, we notice that certain minor keys and the major keys are exactly the same:
+      </p>
+      <p class="notes">C Major is <b>C D E F G A B</b>
+      </p>
+      <p class="notes">A Minor is <b>A B C D E F G</b>
+      </p>
+      <hr>
+      <p class="notes">G Major is <b>G A B C D E F#</b>
+      </p>
+      <p class="notes">E Minor is <b>E F# G A B C D</b>
+      </p>
+      <hr>
+      <p class="notes">D Major is <b>D E F# G A B C#</b>
+      </p>
+      <p class="notes">B Minor is <b>B C# D E F# G A</b>
+      </p>
+      <p>We can also see a few patterns emerge: </p>
+      <ul>
+        <li>Each new Minor Key adds on sharp</li>
+        <li>Each new sharp is one letter above the new named key</li>
+        <li>Each new key is the fifth of the prior key: E is the fifth of A and B is the fifth of G.</li>
+      </ul>
+      <p>And continuing on, we get the Circle of Fifths in all its glory:</p>
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-02/circleOfFifths.png">
+      <h3>Is there an easier way?</h3>
+      <p>I already pointed out that the major keys of the Circle of Fifths can be derived by simply tracking the fifths, increasing sharps, and decreasing flats, and you can derive the minor keys in the same way, but what about the relationships between the major and minor keys? Is there an easy way to recall the minor keys by only memorizing the major keys? I have a poor memory, and I'd like some system that will allow me to remember the relative minors without having to think about the creating of the Circle every time.</p>
+      <p>For example, if I know that F has one flat, I'd like to know what minor key also has one flat. I could do this by rote memory, but I tend to think of it like this:</p>
+      <p class="notes">The relative minor key is 1 ½ steps below the major key.</p>
+      <p>If I start at F Major, I count one Step back, which is D#, then count one Half Step back, which is D. I now know that D Minor is the relative minor of F Major.</p>
+      <p>I probably do this as a result of playing guitar: it's easier for me to understand the relationships as described above, but there are other relationships we can try and I'm guessing that different instruments have properties that make other techniques easier.</p>
+      <p>The key of G Major is G A B C D E F#. I can look at the 6th note of the G Major Scale and know that the relative minor is E Minor. To test it out, lets look at Ab Major: Ab Bb C Dd Eb F G. The 6th note is F. Appears to work out as expected.</p>
+      <p>Here's another relationship. Suppose we use the Circle itself to find the relative minors:</p>
+      <p>If we start at C, we can see that A is three steps away. This also works out, except for one issue: Try using this technique to find the relative minor of A: We end up with Gb and F#. There is no such thing as Gb Minor on the Circle of Fifths, so you'd have to have the insight that you only want to deal with the sharps in this situation. Not a big deal, but I feel like this is the most difficult way.</p>
+      <p>I'm not a proponent of one technique over the other, and I am sure there are many other patterns you can find. I don't know all of the patterns (nor do I want to). I only suggest finding out the patterns that work for you, and no matter how crazy or off-the-wall, I would be glad that it works for you.</p>
+      <h3>Final Thoughts:</h3>
+      <p>I've shown you how to construct the Circle of Fifths and I suppose it answered a lot of questions for you, but I think the Circle opens up many other questions as well. I had already pointed out the missing Gb Minor key. The piano has 17 tones, but the Circle only accounts for 15 of these tones. What happened to the other tones?</p>
+      <p>Does the Circle of Fifths have to end at major and minor keys? What would happen if someone decided to start at F and create a pattern of S S S H S S H? Would there be any insight into more exotic scales and keys? One wouldn't have to search to hard to discover unusual scales found in Western music (see the resources). For those who are programming the Circle, this would be a trivial exercise to attempt.</p>
+      <p>I think as we get further along, many other strange questions are going to arise. I wish the Circle was the end-all be-all of music theory, but it's only a beginning. Music Theory on its surface is all pretty simple, but like the human language, there is a “depends” element to everything.</p>
+
+      <style>
+        code {border: none;
+              background-color: #fefefe !important;}
+      </style>
+
+    </div>
+
+
+    <script>hljs.initHighlightingOnLoad();</Script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.0.16/svg.min.js"></script>
+  </body>
+</html>
