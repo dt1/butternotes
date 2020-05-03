@@ -2,7 +2,7 @@
 
 https://butternotes.com
 
-# How to run:
+## How to run:
 
 This system requires Clojure, Vue.js, NodeJs, npm, and PostgresSQL.
 
@@ -33,3 +33,15 @@ This piece will be available at `localhost:3000`
 `$ npm run serve`
 
 The site will be available and `localhost:8080`
+
+### Routing and HTML
+
+In order to populate the sidenav and routes, you need to add the html files to the appropriate database tables.
+
+### SVG
+
+There is a folder of .svg file in the root directory. These are all hosted on a cdn, which you are welcome to use.
+
+### Licensing.
+
+This software is released under the [Mozilla Public License Version 2.0] (https://www.mozilla.org/en-US/MPL/2.0/)
