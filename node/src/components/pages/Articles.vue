@@ -4,7 +4,6 @@
 
 <script>
 import axios from 'axios'
-// import hljs from 'highlight.js';
 import 'highlight.js/styles/ascetic.css';
 
   export default ({
