@@ -51,10 +51,10 @@
       <p class="notes">
         <b>Note: </b>I am being a tad irresponsible by stating we are deriving all of music theory. To be clear, our focus is strictly on modern Western music. The history of our current theory is fascinating and I'll get into this in another article. If you're so inclined, you can research this yourself.</p>
       <p>Let's start by creating the postulates ourselves. Here is a picture of a few piano keys with their names: </p>
-      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-01/pianoWithFlats.png">
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-01/piano-with-flats.svg" width="500px" >
       <p>I'm using a piano because it is the easiest illustration of the layout of the notes. For those who are not pianists, fear not. I'm a guitarist and I can't even play "Mary Had a Little Lamb" on the piano.</p>
       <p>If you look at the black keys, you'll see that each of them have two names: sharps and flats. The notes go in ascending order from C to B, then start over again. If you were to extend the piano to its full 88 keys, the pattern would repeat itself. Each sharp note is to the right of the natural note, and each flat note is to the left of the natural note. Right now, we don't need the flat notes. We'll come back to them later, I promise, but to make the first step of the project as easy as possible, we'll remove the flat notes:</p>
-      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-01/pianoWithNoFlats.png">
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-01/piano-with-no-flats.svg" width="500px" >
       <p>Let me point out another interesting thing before continuing on. Take note how the C note is always to the left of two black keys, and the F is to the left of three black keys. This pattern will allow us to generalize the patterns needed to create the Circle of Fifths.</p>
       <p class="notes">
         <b>Postulate Number One: </b>The key of C Major is all the white keys of the piano.</p>
@@ -65,7 +65,7 @@
       <p class="notes">
         <b>Postulate Number Three: </b>The pattern of the C Major scale can be used to derive <i>all </i>of the major scales.</p>
       <p>The pattern starts at C and ends at C, giving us Step - Step - Half Step - Step - Step - Step - Half Step:</p>
-      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-01/key-pattern.svg" width="500px">
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-01/key-pattern.svg" width="500px">
       <h3>Generating the Major Keys</h3>
       <p>
         <b>Step One: </b>With our postulates in place, we can begin generating the major keys. Start by grabbing a sheet of paper. It would probably help to use a lined sheet of paper and writing on it sideways so you can keep the notes lined up.</p>
@@ -184,7 +184,7 @@ for notes in SHARP_NOTES:
         b:	 b c# d# e f# g# a# 	5
       </pre>
       <p>The first thing I notice is that C is the only key that has 0 sharps. So, I'll write that at the top of the Circle of Fifths:</p>
-          <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-01/c-circle.svg" width="400px" >
+          <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-01/c-circle.svg" width="400px" >
       <p>Now I have a question and you may have been thinking this too: <i>Shouldn't all of the notes show up in each key?</i>
       </p>
       <p>Look at the key of G#: <i>g# a# c c# d# f g</i>. Why does it have C and C# in there? This isn't supposed to happen, and we'll have to be clever in a moment, but for right now, let's look at the keys that turned out as expected and put them into numerical order:</p>
@@ -208,7 +208,7 @@ for notes in SHARP_NOTES:
       </ol>
       <p>With the pattern emerging, we don't even have to look at the key of E to know that it will turn out to be F#, C#, G#, D#. This pattern will continue on. The wonderful thing here is that once you understand the Circle of Fifths, at least to this point, you can see how it becomes an excellent memorization tool. By using nothing more than a pencil and paper, a bit of math, and not knowing how to read music at all, the Circle of Fifths has already generated the first 6 notes.</p>
       <p>The Fifth Note of the C Major Scale is indeed G, the Fifth Note of the  G Major Scale is D, the Fifth Note of D Major is A. This pattern will continue all around the Circle of Fifths.</p>
-      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-01/b-circle.svg" width="400px">
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-01/b-circle.svg" width="400px">
       <p>Now we're almost half done. With C, G, D, A, E, B out of the way, let's see what's left:</p>
       <pre class="notes">
         c#:	 c# d# f f# g# a# c 	5
@@ -231,7 +231,7 @@ for notes in SHARP_NOTES:
         <b>F# is F# G# A# B C# D# F </b>We do have an extra F, so why not turn that into E#, which gives us F# G# A# B C# D# E# for a total of 6 sharps.</p>
       <p>And notice now how all of the patterns we've seen so far have been maintained. One sharp has been added, each key keeps all the sharps from the previous keys, and the new sharp is one note below the new key's named note. And yes, the fifth of B is F# and the fifth of F# is C#.</p>
       <p>Let's see our progress:</p>
-      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-01/major-circle.svg" width="400px">
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-01/major-circle.svg" width="400px">
       <p>Let's see what we have left:</p>
       <pre class="notes">
         d#:	 d# f g g# a# c d 	3
@@ -246,17 +246,17 @@ for notes in SHARP_NOTES:
         <li>G# A# B# C# D# E# ???: Uh oh. What happened?</li>
       </ol>
       <p>We're stuck. We can't create an F## note (for this purpose, bear with me), so what are we supposed to do? Remember those flats I told you not to worry about? Now may be a good time to worry about them. So let's look at the piano again:</p>
-      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-01/pianoWithFlats.png">
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-01/piano-with-flats.svg" width="500px" >
       <p>What would happen if we decided to make all of these sharps flat so that we have instead of the Key of G# Major, we create  Ab Major? The new scale is: <b>Ab Bb C Db Eb F G</b>. And lo and behold, our new Scale has all the letters with 4 flats.</p>
       <p>The Circle of Fifths shows that the fifth Note of the A Major Scale is E. Perhaps the Fifth Note of Ab Major is Eb? To test this, we can look at D# and convert it to Eb so we end up with <b>Eb F G Ab Bb C D</b> which amazingly, has 3 flats.</p>
       <p>We can now suspect that  Bb must be the fifth of Eb now, which it is. But what about F? Should it be converted to a flat as well? No! F still exists in the key of F even after converting A# to Bb, so the key of F Major has one flat in it. Now we have enough to make the  Circle of Fifths "Full Circe":</p>
-      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-01/almost-circle.svg" width="400px">
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-01/almost-circle.svg" width="400px">
       <p class="notes">
         <b>A New Pattern: </b>Earlier, we learned that there was a distinct pattern of where the next sharp will be in the next Major key, but what about where the next flat appears? This is actually easier. The Key of F major gains Bb, which is right next to F in the Circle. Likewise, Bb keeps Bb and adds Eb, which, once again, is right next door to Bb in the Circle.</p>
       <p>We're not quite done yet, but we can complete the Circle. We know the key of C# has 7 sharps. Shouldn't there be a key that has 7 flats? The Circle of Fifths is supposed to show the relationship between all scales and all the notes.</p>
       <p>But we currently have 12 notes and 12 scales, which suggests we are done. Despite this fact, there are still some relationships we'd like to show. We have yet to discover the Flat Scales with 5, 6, and 7 flats. Fortunately, this part is easily done with a bit of common sense. We know that Ab has 4 flats, so perhaps to the right of it, there is room for a key with 5 flats. C# is already occupying that spot, right? Yes it is, but we know from our prior exercises that C# is equivalent to Db. We can also look at A Major on the right side of the circle and see that D Major sits next to it, so there are two pieces of evidence that lets us know that Db should sit next to Ab. It turns out that Db does in fact have 5 flats. We can also do the same process for Gb, which shares a spot with F#, and Cb, which shares a Spot with B:
       </p>
-      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-01/complete-circle.svg" width="450px">
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-01/complete-circle.svg" width="450px">
 
       <style>
         code {border: none;

@@ -17,9 +17,7 @@
             [buddy.hashers :as hash]
             [clojure.data.json :as json]
 
-            [muse.page.homepage :as hmp]
             [muse.layout.sidenav :as sidenav]
-            [muse.page.about :as abt]
             [muse.page.chord_page :as cpg]
             [muse.page.rsmg_form :as rsmg]
             [muse.page.rsmg_result :as rsmgr]
@@ -102,7 +100,7 @@
 
 (defroutes app-routes
   (GET "/homepage" []
-       (json/write-str (hmp/home-page)))
+       (json/write-str (sql-fn/select-page sql/db {:page-type "home"})))
 
   (GET "/sidenav" []
        (json/write-str (sidenav/side-nav)))
@@ -137,6 +135,12 @@
         (let [x1 (-> request :params :x1)]
           (json/write-str (sql-fn/on-programming-article sql/db {:url x1}))))
 
+  (GET "/reviews/:x1/:x2" request
+       (let [x1 (-> request :params :x1)
+             x2 (-> request :params :x2)
+             r-map {"plugins" (sql-fn/plugin-review sql/db {:url x2})}]
+         (json/write-str (get r-map x1))))
+
   (GET "/amazon-advertisement" []
        (json/write-str (sql-fn/amz-imgtxt-ad sql/db)))
 
@@ -151,7 +155,11 @@
   ;;          (emit-str random-xml)
   ;;          sound-vec)))
 
-  ;; (GET "/about" [] (abt/about))
+  (GET "/about" []
+       (json/write-str (sql-fn/select-page sql/db {:page-type "about"})))
+
+  (GET "/resources" []
+       (json/write-str (sql-fn/select-page sql/db {:page-type "resources"})))
 
   (GET "/lab/random-sheet-music-generator" [] (json/write-str {:rsmg "RSMG22"}))
 

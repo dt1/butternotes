@@ -13,10 +13,10 @@ export default ({
   },
   mounted () {
     axios
-    .get('http://127.0.0.1:3000/homepage')
+    .get('http://127.0.0.1:3000/resources')
     .then(result => (this.info = result));
 
-    document.title = `Butternotes | Home`
+    document.title = `Butternotes | Resources`
 },
 methods: {
       onGoClick: function() {

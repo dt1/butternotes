@@ -3,7 +3,7 @@
             [muse.utils.utils :as utils]
             [clojure.string :as c-str]
             [muse.db.dbfns :as sql-fn]
-            [muse.db.conn :as sql] ))
+            [muse.db.conn :as sql]))
 
 (defn on-programming-links []
   (sql-fn/on-programming-menu sql/db))
@@ -65,15 +65,21 @@
           {:name "Metronome"
            :href "/lab/metronome"}))
 
+(defn review-subnav [x]
+  (let [menu {:plugins (sql-fn/plugin-menu sql/db)}]
+    (menu x)))
+
 (defn review-nav []
-  (vector {:name "Hardware"
-           :href "/reviews/hardware"}
+  (vector ;; {:name "Hardware"
+          ;;  :href "/reviews/hardware"}
           {:name "Plugins"
-           :href "/reviews/hardware"}
-          {:name "Gear"
-           :href "/reviews/hardware"}
-          {:name "Instruments"
-          :href "/reviews/hardware"}))
+           :href "#"
+           :sub2 (review-subnav :plugins)}
+          ;; {:name "Gear"
+          ;;  :href "/reviews/hardware"}
+          ;; {:name "Instruments"
+          ;; :href "/reviews/hardware"}
+          ))
 
 (defn side-nav []
   {:sidenav (vector
@@ -94,4 +100,8 @@
               :sub1 (review-nav)}
              {:title "On Programming"
               :href "#"
-              :sub1 (on-programming-links)})})
+              :sub1 (on-programming-links)}
+             {:title "Resources"
+              :href "/resources"}
+             {:title "About"
+              :href "/about"})})

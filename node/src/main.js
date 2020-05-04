@@ -10,8 +10,11 @@ Vue.config.productionTip = false
 import HomePage from '@/components/pages/HomePage'
 import Notation from '@/components/pages/Scales'
 import Metronome from '@/components/pages/Metronome'
-import ComingSoon from '@/components/pages/ComingSoon'
+// import ComingSoon from '@/components/pages/ComingSoon'
 import Articles from '@/components/pages/Articles'
+import About from '@/components/pages/About'
+import Resources from '@/components/pages/Resources'
+import Reviews from '@/components/pages/Reviews'
 
 import Rsmg from '@/components/notation/Rsmg'
 
@@ -40,9 +43,19 @@ const router =  new VueRouter({
               maininfo: HomePage
           }
         },
-        { path: '/reviews/:item',
+        { path: '/about',
           components: {
-              maininfo: ComingSoon
+              maininfo: About
+          }
+        },
+        { path: '/resources',
+          components: {
+              maininfo: Resources
+          }
+        },
+        { path: '/reviews/:rtype/:article',
+          components: {
+              maininfo: Reviews
           }
         },
         { path: '/lab',

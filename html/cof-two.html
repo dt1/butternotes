@@ -57,9 +57,9 @@
         <b>Quick note about minor scales: </b>In later articles, we'll see that minor scales are a more slippery concept than major scales. For this reason, I have to be careful to clarify an important point: The Circle of Fifths does not show you the minor scales correctly. It shows the <b>relative minors</b> to the major keys. If you play an instrument, practicing the minor scales up and down as described here will produce the incorrect results.</p>
       <p>I imagine some of you have manually derived the minor keys of the Circle after reading the last article, but I want to quickly document the difference before continuing on.</p>
       <p>The minor keys of the Circle start at A Minor. In the last article, I showed that the pattern for C is S S H S S S H. Let's look at the handy piano to see what the pattern for A Minor is.</p>
-      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-02/piano-with-flats.svg" width="500px" >
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-02/piano-with-flats.svg" width="500px" >
       <p>Similar to C, we only want to find the white keys:</p>
-      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-02/minorKeyPattern.png">
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-02/minorKeyPattern.png">
       <p>The pattern is S H S S H S S, so if we were to do what was described in the last article, we'd start here:</p>
       <pre>
              A  A#  B  C  C#  D  D#  E  F  F#  G  G# ... Sharps
@@ -219,7 +219,7 @@ makeScale('F', minor())
         <li>Each new key is the fifth of the prior key: E is the fifth of A and B is the fifth of G.</li>
       </ul>
       <p>And continuing on, we get the Circle of Fifths in all its glory:</p>
-      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/on-programming/cof-02/circle-of-fifths.svg" width="500px" >
+      <img src="https://items.sfo2.cdn.digitaloceanspaces.com/cof-02/circle-of-fifths.svg" width="500px" >
       <h3>Is there an easier way?</h3>
       <p>I already pointed out that the major keys of the Circle of Fifths can be derived by simply tracking the fifths, increasing sharps, and decreasing flats, and you can derive the minor keys in the same way, but what about the relationships between the major and minor keys? Is there an easy way to recall the minor keys by only memorizing the major keys? I have a poor memory, and I'd like some system that will allow me to remember the relative minors without having to think about the creating of the Circle every time.</p>
       <p>For example, if I know that F has one flat, I'd like to know what minor key also has one flat. I could do this by rote memory, but I tend to think of it like this:</p>
