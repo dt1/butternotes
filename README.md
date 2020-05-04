@@ -34,13 +34,21 @@ This piece will be available at `localhost:3000`
 
 The site will be available and `localhost:8080`
 
-### Routing and HTML
+### Asset files
 
-In order to populate the sidenav and routes, you need to add the html files to the appropriate database tables.
+## Routing in the side nav
 
-### SVG
+Most of the sidenav is hard-coded in Clojure, however, the "On Programming" and "Reviews" trees will not be populated.
 
-There is a folder of .svg file in the root directory. These are all hosted on a cdn, which you are welcome to use.
+In order for the sidenav to be complete, you would have to populate the appropriate tables with the routes.
+
+### HTML
+
+All HTML is built by hand and loaded in the database.
+
+### IMG
+
+The folder of images files include .svg and .png images. These are all hosted on my cdn.
 
 ### Licensing.
 
