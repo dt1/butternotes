@@ -36,17 +36,17 @@ The site will be available and `localhost:8080`
 
 ### Asset files
 
-## Routing in the side nav
+#### Routing in the side nav
 
 Most of the sidenav is hard-coded in Clojure, however, the "On Programming" and "Reviews" trees will not be populated.
 
 In order for the sidenav to be complete, you would have to populate the appropriate tables with the routes.
 
-## HTML
+#### HTML
 
 All HTML is built by hand and loaded in the database.
 
-## IMG
+#### IMG
 
 The folder of images files include .svg and .png images. These are all hosted on my cdn.
 
