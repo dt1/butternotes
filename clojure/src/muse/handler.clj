@@ -7,8 +7,6 @@
             [ring.util.response :refer [response]]
             [ring.middleware.cors :as cors]
 
-
-            [muse.page.page :as pg]
             [muse.genxml.genxml :as gxml]
             [muse.genxml.notevector :as nvr]
             [muse.genxml.soundvector :as svr]
@@ -28,10 +26,13 @@
             [muse.valid_xn_map :as vxm]
 
             [muse.db.dbfns :as sql-fn]
-            [muse.db.conn :as sql]
-
-            [muse.gdefs.gdefs :as gdefs])
+            [muse.db.conn :as sql])
   (:gen-class))
+
+(def valid-scale-notes
+  ["c" "c-sharp" "d-flat" "d" "d-sharp" "e-flat" "e" "e-sharp"
+   "f-flat" "f" "f-sharp" "g-flat" "g" "g-sharp" "a-flat" "a"
+   "a-sharp" "b-flat" "b" "b-sharp" "c-flat"])
 
 (def converter-map {"natural-scales" "natural-minor-scales"
                     "harmonic-scales" "harmonic-minor-scales"
@@ -67,15 +68,8 @@
     {:xml (emit-str (gxml/gen-sheet-music chord-vector chord-name m))}))
 
 (defn build-scales [s]
-  (for [note gdefs/valid-scale-notes]
+  (for [note valid-scale-notes]
     (apply str note "-" s)))
-
-;; (defroutes blog-page
-;;   (GET "/:blog-id" [blog-id]
-;;        (if (not
-;;             (empty?
-;;              (sql/blog-content sql/db {:blog_id blog-id})))
-;;          (bpg/blog-page blog-id))))
 
 ;; validate routes
 

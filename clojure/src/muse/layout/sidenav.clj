@@ -4,10 +4,6 @@
             [clojure.string :as c-str]
             [muse.db.dbfns :as sql-fn]
             [muse.db.conn :as sql]))
-
-(defn on-programming-links []
-  (sql-fn/on-programming-menu sql/db))
-
 (defn submenu-links [scl]
   (let [x (vxm/valid-xn-map scl)]
      (for [xx x]
@@ -100,7 +96,7 @@
               :sub1 (review-nav)}
              {:title "On Programming"
               :href "#"
-              :sub1 (on-programming-links)}
+              :sub1 (sql-fn/on-programming-menu sql/db)}
              {:title "Resources"
               :href "/resources"}
              {:title "About"
