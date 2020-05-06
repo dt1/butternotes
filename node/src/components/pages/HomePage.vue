@@ -1,5 +1,5 @@
 <template>
-<div v-html="this.info.data.html"></div>
+<div class="elems" v-html="this.info.data.html"></div>
 </template>
 
 <script>
@@ -26,4 +26,21 @@ methods: {
   })
 </script>
 
-<style scoped></style>
+<style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Nanum+Gothic&display=swap');
+
+
+.elems {
+    font-family: 'Comfortaa', cursive;
+    }
+
+  .elems >>>  h3 {
+  /* font-family: 'La Belle Aurore', cursive;  */
+  /* font-family: cursive; */
+  font-family: 'Comfortaa', cursive;
+  font-size: 3em;
+  color: #fad587;
+  text-shadow: -1px 2px #9c6b06;
+  }
+
+</style>

@@ -1,7 +1,7 @@
 <template>
 <ul class="menu">
   <li v-for="i in nav" :key="i[0]">
-    <router-link v-bind:to="i[1]" >{{ i[0] }}</router-link>
+    <router-link class="elems" v-bind:to="i[1]" >{{ i[0] }}</router-link>
   </li>
 </ul>
 </template>
@@ -63,4 +63,11 @@ this.nav = genLinks(scale, stype, ntype);
 
 </script>
 
-<style scoped></style>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Nanum+Gothic&display=swap');
+
+.elems {
+    font-family: 'Comfortaa', cursive;
+    }
+
+</style>

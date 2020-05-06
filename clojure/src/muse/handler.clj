@@ -16,7 +16,6 @@
             [clojure.data.json :as json]
 
             [muse.layout.sidenav :as sidenav]
-            [muse.page.chord_page :as cpg]
             [muse.page.rsmg_form :as rsmg]
             [muse.page.rsmg_result :as rsmgr]
             [muse.page.lab_gen_sheet_music :as lab-gsm]

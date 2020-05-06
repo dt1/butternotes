@@ -1,6 +1,6 @@
 <template>
 <div>
-  <ul class="vertical menu accordion-menu" data-accordion-menu>
+  <ul class="vertical menu accordion-menu" data-accordion-menu data-multi-open="false">
     <li v-for="i in nav" :key="i.title">
       <router-link v-bind:to=i.href>{{ i.title }}</router-link>
       <ul class="menu vertical nested" v-if="i.sub1">
@@ -50,8 +50,27 @@ mounted () {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap');
+
 .accordion-menu {
     width: 200px;
+    /* font-family: 'La Belle Aurore', cursive; */
+    font-family: cursive;
+    font-size: 1.5em;
+    /* background-color: #fad587; */
 }
+
+a {
+    color: #9c6b06;
+}
+
+.accordion-menu .is-accordion-submenu-parent:not(.has-submenu-toggle) > a::after {
+    color: #9c6b06;
+}
+
+.accordion-menu .is-accordion-submenu-parent[aria-expanded="true"] > a::after  {
+    color: #9c6b06;
+}
+
 
 </style>

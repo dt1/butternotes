@@ -1,10 +1,8 @@
 <template>
 <div>
   <note-menu />
-
   <play-music v-if="sounds" :note-list="sounds" :key="k" />
   <osmd v-if="notation" :notation="notation" :key="k" />
-
   <div>
     <ul class="accordion" data-accordion data-allow-all-closed="true">
       <li class="accordion-item" data-accordion-item>

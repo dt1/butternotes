@@ -26,4 +26,12 @@ methods: {
   })
 </script>
 
-<style scoped></style>
+<style scoped>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Nanum+Gothic&display=swap');
+
+
+  div {
+    font-family: 'Comfortaa', cursive;
+    }
+
+</style>
