@@ -48,11 +48,10 @@
   @import url('https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap');
 
   .bn {
-      /* font-family: 'La Belle Aurore', cursive; */
-           font-family: 'La Belle Aurore', cursive;
-  font-size: 2.3em;
-  color: #fad587;
-  text-shadow: -1px 2px #9c6b06;
+      font-family: 'La Belle Aurore', cursive;
+      font-size: 2.3em;
+      color: #fad587;
+      text-shadow: -1px 2px #9c6b06;
   }
 
   .black {

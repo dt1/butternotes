@@ -1,5 +1,5 @@
 <template>
-<div v-html="this.info.data.html"></div>
+<div class="elems" v-html="this.info.data.html"></div>
 </template>
 
 <script>
@@ -35,5 +35,11 @@ export default ({
 
   div {
     font-family: 'Comfortaa', cursive;
-    }
+  }
+
+  .elems >>>  h1 {
+      font-family: cursive;
+      font-size: 2em;
+  }
+
 </style>
