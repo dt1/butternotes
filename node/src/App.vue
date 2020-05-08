@@ -2,7 +2,8 @@
 
 <div id="app">
   <div class="grid-container fluid">
-    <div class="grid-x grid-margin-x">
+
+    <div class="grid-x">
       <div class="cell small-12">
         <h1 style="font-size: 1em;">
           <router-link to="/" class="bn">Butter Notes</router-link>
@@ -11,16 +12,15 @@
         </h1>
       </div>
     </div>
-  </div>
 
-  <div class="grid-container fluid">
-    <div class="grid-x">
-      <side-nav class="cell small-2" />
-      <router-view class="cell small-7" name="maininfo" :key="$route.fullPath" />
-      <div class="cell small-3">
-        <amazon-ad class="cell small-offset-3" :key="$route.fullPath" />
+    <div class="grid-x grid-margin-x" >
+      <side-nav class="cell large-2 small-12" />
+      <router-view class="cell large-7 small-12" name="maininfo" :key="$route.fullPath" />
+      <div class="cell large-3 small-12">
+        <amazon-ad class="cell large-offset-3" :key="$route.fullPath" />
       </div>
     </div>
+
   </div>
 </div>
 
