@@ -3,22 +3,30 @@
 </template>
 
 <script>
-  import axios from 'axios'
+import axios from 'axios'
+import { rtToTitleCase } from '@/components/utils/string.js'
 
-  export default ({
-  data () {
-  return {
-  article: this.$route.params.article,
-  rtype: this.$route.params.rtype,
-  info: null
-  }
-  },
+export default ({
+    data () {
+        return {
+            article: this.$route.params.article,
+            rtype: this.$route.params.rtype,
+            info: null
+        }
+    },
 
-mounted () {
-    axios
-    .get(`http://127.0.0.1:3000/reviews/${this.rtype}/${this.article}`)
-    .then(result => (this.info = result));
-}
+    mounted () {
+        this.getData();
+    },
+
+    methods: {
+        async getData() {
+            this.info = await axios
+                .get(`http://127.0.0.1:3000/reviews/${this.rtype}/${this.article}`)
+            document.title = "ButterNotes | " + rtToTitleCase(this.info.data.title) + " Review";
+
+        }
+    }
 })
 </script>
 

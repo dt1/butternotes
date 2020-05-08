@@ -37,7 +37,7 @@ methods: {
   .elems >>>  h3 {
   /* font-family: 'La Belle Aurore', cursive;  */
   /* font-family: cursive; */
-  font-family: 'Comfortaa', cursive;
+  font-family: cursive;
   font-size: 3em;
   color: #fad587;
   text-shadow: -1px 2px #9c6b06;

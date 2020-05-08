@@ -46,92 +46,110 @@ import DlMusicXml from '@/components/notation/DownloadMusicXml'
 import ShowNotes from '@/components/notation/ShowNotes'
 import MajorModes from '@/components/notation/MajorModes'
 import ScaleForm from '@/components/notation/ScaleForm'
-
+import { rtToTitleCase } from '@/components/utils/string.js'
 
 export default ({
-components: {
-NoteMenu,
-PlayMusic,
-Osmd,
-DlMusicXml,
-ShowNotes,
-MajorModes,
-ScaleForm
-},
+    components: {
+        NoteMenu,
+        PlayMusic,
+        Osmd,
+        DlMusicXml,
+        ShowNotes,
+        MajorModes,
+        ScaleForm
+    },
 
-data () {
-return {
-notation: null,
-sounds: null,
-modeList: null,
-returnedData: null,
-clef: null,
-octave: null,
-keysig: null,
-scale: this.$route.params.scale,
-stype: this.$route.params.stype,
-ntype: this.$route.params.ntype,
-result: null,
-payload: new Object(),
-k: 0
-}
-},
+    data () {
+        return {
+            notation: null,
+            sounds: null,
+            modeList: null,
+            returnedData: null,
+            clef: null,
+            octave: null,
+            keysig: null,
+            scale: this.$route.params.scale,
+            stype: this.$route.params.stype,
+            ntype: this.$route.params.ntype,
+            result: null,
+            payload: new Object(),
+            k: 0
+        }
+    },
 
-async mounted () {
-this.getData();
-}
-,
+    async mounted () {
+        this.getData();
+        this.updateMeta();
+    }
+    ,
 
-updated() {
-this.$nextTick(function () {
-this.menu = new this.$foundation.Accordion($('.accordion'))
-})
-},
+    updated() {
+        this.$nextTick(function () {
+            this.menu = new this.$foundation.Accordion($('.accordion'))
+        })
+    },
 
-methods: {
-updateNotes (value) {
+    methods: {
+        updateNotes (value) {
 
-this.payload.clef = value.get("clef");
-this.payload.octave = value.get("octave").toString();
-this.payload.keysig = value.get("keySig").toString();
+            this.payload.clef = value.get("clef");
+            this.payload.octave = value.get("octave").toString();
+            this.payload.keysig = value.get("keySig").toString();
 
-this.getData();
-}
-,
-
-
-forceRerender() {
-      this.k += 1;
-}
-,
-
-async getData () {
-if (this.ntype) {
-this.result =  await axios
-    .post(`http://127.0.0.1:3000/${this.scale}/${this.stype}/${this.ntype}`, this.payload);
-} else {
-this.result = await axios
-    .post(`http://127.0.0.1:3000/${this.scale}/${this.stype}`, this.payload);
-}
+            this.getData();
+        }
+        ,
 
 
-this.$nextTick(); // wait for re-render
-this.notation = this.result.data.xml;
+        forceRerender() {
+            this.k += 1;
+        }
+        ,
 
-if (this.result.data.sound) {
-this.sounds = JSON.parse(this.result.data.sound.replace(/'/g, '"'));
-}
+        updateMeta () {
+            console.log("work");
+            if (this.ntype) {
+                document.title = "ButterNotes | " +  rtToTitleCase(this.ntype);
+            } else {
+                document.title = "ButterNotes | " + rtToTitleCase(this.stype);
+            }
+        }
+        ,
 
-this.forceRerender();
-}
+        async getData () {
+            if (this.ntype) {
+                this.result =  await axios
+                    .post(`http://127.0.0.1:3000/${this.scale}/${this.stype}/${this.ntype}`, this.payload);
+            } else {
+                this.result = await axios
+                    .post(`http://127.0.0.1:3000/${this.scale}/${this.stype}`, this.payload);
+            }
 
 
+            this.$nextTick(); // wait for re-render
+            this.notation = this.result.data.xml;
 
+            if (this.result.data.sound) {
+                this.sounds = JSON.parse(this.result.data.sound.replace(/'/g, '"'));
+            }
 
-}
+            this.forceRerender();
+        }
+    }
 })
 
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.accordion {
+    padding-top: 5em;
+}
+
+a {
+    color: #9c6b06;
+    font-size: 1.5em;
+    font-family: cursive;
+
+}
+</style>

@@ -1,26 +1,32 @@
 <template>
-<div v-html="this.info.data.html"></div>
+<div class="elems" v-html="this.info.data.html"></div>
 </template>
 
 <script>
 import axios from 'axios'
 import 'highlight.js/styles/ascetic.css';
+import { rtToTitleCase } from '@/components/utils/string.js'
 
-  export default ({
-  data () {
-  return {
-  article: this.$route.params.article,
-  info: null
-  }
-  },
+export default ({
+    data () {
+        return {
+            article: this.$route.params.article,
+            info: null
+        }
+    },
 
-mounted () {
-    axios
-    .get(`http://127.0.0.1:3000/on-programming/${this.article}`)
-    .then(result => (this.info = result));
+    mounted () {
+        this.getData();
+    }
+    ,
 
-// hljs.initHighlightingOnLoad();
-}
+    methods: {
+        async getData() {
+            this.info = await axios
+                .get(`http://127.0.0.1:3000/on-programming/${this.article}`);
+            document.title = "ButterNotes | " + rtToTitleCase(this.info.data.title);
+        }
+    }
 
 
 
@@ -33,5 +39,9 @@ mounted () {
   div {
     font-family: 'Comfortaa', cursive;
     }
+
+  .elems >>> .notes {
+  margin: 0 4em 1em 2em;
+  }
 
 </style>
